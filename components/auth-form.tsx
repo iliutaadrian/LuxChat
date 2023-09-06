@@ -26,19 +26,24 @@ const formSchema = z.object({
 })
 const AuthForm = () => {
     const [variant, setVariant] = useState('signin')
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     const router = useRouter()
     const session = useSession()
 
     useEffect(() => {
-        if (session?.status == 'authenticated') {
-            router.push('/')
-        }
+        const checkSessionAndRedirect = async () => {
+            if (session?.status === 'authenticated') {
+                await router.push('/');
+            }
+        };
+
+        checkSessionAndRedirect();
     }, [session?.status, router])
 
     const toggleVariant = useCallback(() => {
         setVariant(variant === 'signin' ? 'signup' : 'signin')
+        form.reset()
     }, [variant])
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -83,7 +88,10 @@ const AuthForm = () => {
 
     return (
         <div className={'max-w-md mx-auto'}>
-            <div className="h-full p-4 max-w-3xl mx-auto">
+            <h1 className={'text-center text-xl font-semibold py-5'}>
+                {variant === 'signin' ? "Sign in to your account" : "Create your account"}
+            </h1>
+            <div className="h-full p-4 sm:max-w-3xl mx-auto">
                 <Form {...form}>
                     <form
                         className="space-y-8 pb-10"
