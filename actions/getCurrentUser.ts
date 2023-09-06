@@ -4,9 +4,7 @@ import prisma from "@/lib/prismadb";
 const getCurrentUser = async () => {
     try {
         const session = await getSession();
-
-        console.log(session)
-
+        
         if (!session?.user?.username) {
             return null;
         }
