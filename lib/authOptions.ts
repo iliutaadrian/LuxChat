@@ -42,8 +42,23 @@ export const authOptions: AuthOptions = {
         })
     ],
     debug: process.env.NODE_ENV === 'development',
+    callbacks: {
+        jwt: async ({ token, user }) => {
+            if (user) token = user as unknown as { [key: string]: any };
+
+            return token;
+        },
+        session: async ({ session, token }) => {
+            session.user = { ...token }
+            return session;
+        },
+    },
+    pages: {
+        signIn: "/login",
+    },
     session: {
         strategy: "jwt",
     },
     secret: process.env.NEXTAUTH_SECRET,
+
 }

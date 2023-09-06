@@ -26,7 +26,7 @@ const formSchema = z.object({
 })
 const AuthForm = () => {
     const [variant, setVariant] = useState('signin')
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
 
     const router = useRouter()
     const session = useSession()
