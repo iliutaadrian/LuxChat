@@ -6,8 +6,7 @@ export const Navbar = async () => {
     const currentUser = await getCurrentUser()
 
     return(
-        <div className={'md:hidden p-5 flex flex-row'}>
-            {currentUser?.username}
+        <div className={'md:hidden flex flex-row'}>
             <MobileFooter/>
         </div>
     )

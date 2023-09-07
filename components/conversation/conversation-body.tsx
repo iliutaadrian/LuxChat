@@ -7,18 +7,16 @@ import {  Conversation } from "@prisma/client";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {ChevronLeft, MoreHorizontal, Image, PlusCircle, SendHorizonal, Mic} from "lucide-react";
 import {Input} from "@/components/ui/input";
-import {ConversationHeader} from "@/components/conversation/conversation-header";
-import {ConversationBody} from "@/components/conversation/conversation-body";
-import {ConversationInput} from "@/components/conversation/conversation-input";
+import {ConversationMessage} from "@/components/conversation/conversation-message";
 
 
 interface ConversationItemProps {
     conversation: Conversation
 }
 
-export const ConversationItem =  ({
-   conversation
-}:ConversationItemProps) => {
+export const ConversationBody =  ({
+                                      conversation
+                                  }:ConversationItemProps) => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
 
@@ -28,10 +26,12 @@ export const ConversationItem =  ({
     }, [conversation.id, router])
 
     return (
-        <div className={'relative max-w-screen-xl h-screen'}>
-            <ConversationHeader conversation={conversation}/>
-            <ConversationBody conversation={conversation}/>
-            <ConversationInput conversation={conversation}/>
+        <div>
+            <div className={'flex flex-col overflow-x-scroll items-start'}>
+                <ConversationMessage conversation={conversation} role={'sender'}/>
+                <ConversationMessage conversation={conversation} role={'receiver'}/>
+            </div>
+
         </div>
 
     )
