@@ -4,7 +4,6 @@ import {UserList} from "@/components/user/user-list";
 import getUsers from "@/actions/getUsers";
 
 export default async function UsersPage() {
-
     return (
         <>
             {/*<UserList users={users}/>*/}
