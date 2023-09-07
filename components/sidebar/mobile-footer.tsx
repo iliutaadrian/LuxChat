@@ -4,13 +4,14 @@ import useRoutes from "@/hooks/useRoutes";
 import {useState} from "react";
 import Link from "next/link";
 import {cn} from "@/lib/utils";
+import useConversations from "@/hooks/useConversations";
 
 export const MobileFooter = () => {
     const routes = useRoutes()
-    const [isOpened, setIsOpened] = useState(false)
+    const {isOpen} = useConversations();
 
     return (
-        <div>
+        <div className={`${isOpen && 'hidden'}`}>
             <nav className="fixed z-20 inset-x-0 bottom-0 bg-slate-100 border-slate-300/30 border w-full align-middle flex flex-row items-center h-14">
                 <ul role={'list'} className={'flex flex-row w-full justify-evenly'}>
                     {routes.map((route) => {

@@ -27,13 +27,13 @@ export const ConversationsItem =  ({
         <div onClick={handleClick} className={'bg-slate-400/10 hover:bg-slate-400/20 flex flex-row my-5 p-2 cursor-pointer align-middle items-center rounded-lg'}>
             <div className={'w-10 h-10 relative'}>
                 <Avatar>
-                    <AvatarImage className={'hidden shadow-lg shadow-black'} src="/placeholder.jpg" alt="conversation" />
+                    <AvatarImage className={'shadow-lg shadow-black'} src="/placeholder.jpg" alt="conversation" />
                     <AvatarFallback className={'shadow-lg shadow-black'} ></AvatarFallback>
                 </Avatar>
                 <span className={'absolute top-0 right-0 bg-green-500 w-3 h-3 rounded-full shadow-xl shadow-black'}> </span>
             </div>
             <p className={'ml-2 text-sm font-medium'}>
-                {conversation.name}
+                Mesasuffl tau ad fost fdsfd
             </p>
         </div>
     )
