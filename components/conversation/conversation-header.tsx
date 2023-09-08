@@ -7,6 +7,7 @@ import {  Conversation } from "@prisma/client";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {ChevronLeft, MoreHorizontal, Image, PlusCircle, SendHorizonal, Mic} from "lucide-react";
 import {Input} from "@/components/ui/input";
+import Link from "next/link";
 
 
 interface ConversationItemProps {
@@ -16,18 +17,12 @@ interface ConversationItemProps {
 export const ConversationHeader =  ({
                                       conversation
                                   }:ConversationItemProps) => {
-    const router = useRouter()
-    const [isLoading, setIsLoading] = useState(false)
-
-    const handleClick = useCallback(()=>{
-        router.push(`/conversations/${conversation.id}`);
-
-    }, [conversation.id, router])
-
     return (
-        <div onClick={handleClick} className={'bg-slate-400/10 flex flex-row px-5 py-3 justify-between align-middle items-center rounded-lg border-b-2 border-slate-500/20'}>
-                <div className={'flex flex-row'}>
-                    <ChevronLeft/>
+        <div className={'flex flex-row px-5 py-3 justify-between align-middle items-center border-b-2 border-muted-foreground bg-secondary'}>
+                <div className={'flex flex-row items-center'}>
+                    <Link href={'/conversations'}>
+                        <ChevronLeft className={'cursor-pointer mr-4'}/>
+                    </Link>
                     <div className={'w-10 h-10 relative'}>
                         <Avatar>
                             <AvatarImage className={'shadow-lg shadow-black'} src="/placeholder.jpg" alt="conversation" width={'8'} height={'8'} />
@@ -39,10 +34,10 @@ export const ConversationHeader =  ({
                         <p className={'text-md font-medium'}>
                             Alex Smith
                         </p>
-                        <span className={'text-xs'}>Active</span>
+                        <span className={'text-xs text-muted-foreground'}>Active</span>
                     </div>
                 </div>
-                <MoreHorizontal className={'text-sky-400 text-right'}/>
+                <MoreHorizontal className={'text-primary hover:text-primary-foreground text-right cursor-pointer'}/>
             </div>
     )
 }

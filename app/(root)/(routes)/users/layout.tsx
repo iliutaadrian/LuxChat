@@ -11,9 +11,9 @@ export default async function RoutesLayout({
     const users = await getUsers()
 
     return (
-        <div className="h-full bg-slate-100">
+        <div className="h-full bg-background">
             <Navbar/>
-            <div className={'hidden md:flex flex-col w-80 fixed min-h-full p-5 border-slate-500/20 border-2'}>
+            <div className={'hidden md:flex flex-col w-80 fixed min-h-full p-5 border-muted-foreground border-r'}>
                 <Sidebar/>
                 <UserList users={users}/>
             </div>

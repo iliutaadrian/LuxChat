@@ -29,16 +29,16 @@ export const ConversationMessage =  ({
                     </Avatar>
                 </div>
                 <div className={cn("flex flex-col", role === 'sender' && 'items-end')}>
-                    <div className={cn('text-slate-950 rounded-2xl p-3 mx-3 mb-2 w-fit', role === 'sender' ? 'bg-blue-300' : 'bg-sky-300')}>
+                    <div className={cn('rounded-2xl p-3 mx-3 mb-2 w-fit', role === 'sender' ? 'bg-primary' : 'bg-primary/50')}>
                         <div className="">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci alias aliquid a Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci alias aliquid a Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci alias aliquid a
                         </div>
                     </div>
-                    <div className={cn('text-slate-950 rounded-2xl p-3 mx-3 mb-2 w-fit', role === 'sender' ? 'bg-blue-300' : 'bg-sky-300')}>
+                    <div className={cn('rounded-2xl p-3 mx-3 mb-2 w-fit', role === 'sender' ? 'bg-primary' : 'bg-primary/50')}>
                             message
                     </div>
 
-                    <div className={'mx-4 text-xs text-slate-600'}>
+                    <div className={'mx-4 text-xs text-muted-foreground'}>
                         12:30 AM
                     </div>
                 </div>

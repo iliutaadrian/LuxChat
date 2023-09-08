@@ -27,7 +27,7 @@ export const ConversationBody =  ({
 
     return (
         <div>
-            <div className={'flex flex-col overflow-x-scroll items-start'}>
+            <div className={'flex flex-col overflow-x-scroll items-start h-full'}>
                 <ConversationMessage conversation={conversation} role={'sender'}/>
                 <ConversationMessage conversation={conversation} role={'receiver'}/>
             </div>

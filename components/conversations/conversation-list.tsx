@@ -18,7 +18,7 @@ const ConversationList = ({conversations}:ConversationListProps) => {
 
     return (
         <div className={'ml-16'}>
-            <h1 className={'text-xl font-bold text-slate-900'}> Messages </h1>
+            <h1 className={'text-xl font-bold'}> Messages </h1>
             {conversations?.map(conv=>{
                 return (
                     <ConversationsItem conversation={conv} key={conv.id}/>

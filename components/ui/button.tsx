@@ -9,7 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-          auth: 'w-full bg-sky-400 text-slate-50 rounded-lg hover:bg-sky-500 h-9',
+          auth: 'w-full bg-sky-400 rounded-lg hover:bg-sky-500 h-9',
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",

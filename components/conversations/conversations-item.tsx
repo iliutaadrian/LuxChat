@@ -24,7 +24,7 @@ export const ConversationsItem =  ({
     }, [conversation.id, router])
 
     return (
-        <div onClick={handleClick} className={'bg-slate-400/10 hover:bg-slate-400/20 flex flex-row my-5 p-2 cursor-pointer align-middle items-center rounded-lg'}>
+        <div onClick={handleClick} className={'flex flex-row my-5 p-2 cursor-pointer align-middle items-center rounded-lg bg-muted hover:bg-muted-foreground'}>
             <div className={'w-10 h-10 relative'}>
                 <Avatar>
                     <AvatarImage className={'shadow-lg shadow-black'} src="/placeholder.jpg" alt="conversation" />

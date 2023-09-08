@@ -13,8 +13,8 @@ import { useRouter } from "next/navigation";
 import { Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {signIn, useSession} from "next-auth/react";
-
-type variant = 'signin' | 'signup'
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
+import {Label} from "@/components/ui/label";
 
 const formSchema = z.object({
     username: z.string().min(1, {
@@ -56,15 +56,13 @@ const AuthForm = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         setIsLoading(true)
+        // TODO: Fix this
         if (variant === 'signin') {
             signIn('credentials', {
                 username: values.username,
                 password: values.password,
             }).then((callback) => {
-                callback?.error ? toast({
-                    variant: "destructive",
-                    description: "Something went wrong"
-                }) : router.push('/')
+                callback?.error ? console.log(111) : router.push('/')
             }).finally(() => {
                 setIsLoading(false)
             })
@@ -105,7 +103,7 @@ const AuthForm = () => {
                                         <FormLabel className={"text-sm font-normal"}>Username</FormLabel>
                                         <FormControl>
                                             <Input
-                                                className={"rounder-lg border-gray/20 bg-transparent mt-0"}
+                                                className={"rounder-lg border-primary/20 bg-transparent mt-0"}
                                                 type="text"
                                                 disabled={isLoading}
                                                 {...field}></Input>
@@ -121,7 +119,7 @@ const AuthForm = () => {
                                         <FormLabel className={"text-sm font-normal"}>Password</FormLabel>
                                         <FormControl>
                                             <Input
-                                                className={"rounder-lg border-gray/20 bg-transparent"}
+                                                className={"rounder-lg border-primary/20 bg-transparent"}
                                                 type="password"
                                                 disabled={isLoading}
                                                 {...field}></Input>
@@ -137,9 +135,9 @@ const AuthForm = () => {
                         </div>
                     </form>
                 </Form>
-                <div className={'text-sm font-light text-slate-900 text-center'}>
+                <div className={'text-sm font-light text-center'}>
                     {variant === 'signin' ? 'New to Messenger ' : 'Already have an account '}
-                    <span className={'text-slate-500 cursor-pointer underline'} onClick={toggleVariant}>
+                    <span className={'text-muted-foreground cursor-pointer underline'} onClick={toggleVariant}>
                         {variant ==='signin' ? 'Create an account' : 'Sign in to your account'}
                     </span>
                 </div>
