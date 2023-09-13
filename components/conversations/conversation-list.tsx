@@ -7,6 +7,8 @@ import {useRouter} from "next/navigation";
 import {Conversation, User} from "@prisma/client";
 import {UserItem} from "@/components/user/user-item";
 import {ConversationsItem} from "@/components/conversations/conversations-item";
+import useConversations from "@/hooks/useConversations";
+import {cn} from "@/lib/utils";
 
 
 interface ConversationListProps {
@@ -15,9 +17,11 @@ interface ConversationListProps {
 
 const ConversationList = ({conversations}:ConversationListProps) => {
     const [isLoading, setIsLoading] = useState(false)
+    const {isOpen} = useConversations()
+
 
     return (
-        <div className={'ml-16'}>
+        <div className={cn('flex flex-col gap-5' , isOpen && 'hidden md:block')}>
             <h1 className={'text-xl font-bold'}> Messages </h1>
             {conversations?.map(conv=>{
                 return (

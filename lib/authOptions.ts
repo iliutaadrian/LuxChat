@@ -49,6 +49,7 @@ export const authOptions: AuthOptions = {
             return token;
         },
         session: async ({ session, token }) => {
+            // @ts-ignore
             session.user = { ...token }
             return session;
         },

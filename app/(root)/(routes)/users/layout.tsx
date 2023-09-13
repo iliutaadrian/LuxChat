@@ -1,7 +1,8 @@
-import {Navbar} from "@/components/navbar";
-import {Sidebar} from "@/components/sidebar";
 import {UserList} from "@/components/user/user-list";
 import getUsers from "@/actions/getUsers";
+import {DesktopSidebar} from "@/components/sidebar/desktop-sidebar";
+import ConversationList from "@/components/conversations/conversation-list";
+import {MobileFooter} from "@/components/sidebar/mobile-footer";
 
 export default async function RoutesLayout({
    children,
@@ -12,16 +13,18 @@ export default async function RoutesLayout({
 
     return (
         <div className="h-full bg-background">
-            <Navbar/>
-            <div className={'hidden md:flex flex-col w-80 fixed min-h-full p-5 border-muted-foreground border-r'}>
-                <Sidebar/>
+            <div className={'hidden w-full md:flex flex-col md:w-80 fixed min-h-full p-5 border-muted-foreground md:border-r-2 md:ml-16'}>
+                <DesktopSidebar/>
+            </div>
+
+            <div className={'flex w-full md:flex flex-col md:w-80 fixed min-h-full p-5 border-muted-foreground md:border-r-2 md:ml-16'}>
                 <UserList users={users}/>
             </div>
             <div className={"lg:block md:pl-80 h-full"}>
-                <div className={" flex flex-col items-center justify-center h-full"}>
-                    {children}
-                </div>
+                {children}
             </div>
+
+            <MobileFooter/>
         </div>
     )
 }

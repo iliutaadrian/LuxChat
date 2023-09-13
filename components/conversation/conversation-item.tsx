@@ -2,18 +2,16 @@
 
 import {useRouter} from "next/navigation";
 import {useCallback, useState} from "react";
-import axios from "axios";
-import {  Conversation } from "@prisma/client";
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import {ChevronLeft, MoreHorizontal, Image, PlusCircle, SendHorizonal, Mic} from "lucide-react";
-import {Input} from "@/components/ui/input";
+import {Conversation, User} from "@prisma/client";
 import {ConversationHeader} from "@/components/conversation/conversation-header";
 import {ConversationBody} from "@/components/conversation/conversation-body";
 import {ConversationInput} from "@/components/conversation/conversation-input";
 
 
 interface ConversationItemProps {
-    conversation: Conversation
+    conversation: Conversation & {
+        users: User[]
+    }
 }
 
 export const ConversationItem =  ({
@@ -28,11 +26,10 @@ export const ConversationItem =  ({
     }, [conversation.id, router])
 
     return (
-        <div className={'relative max-w-screen-xl h-screen'}>
+        <div className={'relative h-full bg-background'}>
             <ConversationHeader conversation={conversation}/>
             <ConversationBody conversation={conversation}/>
             <ConversationInput conversation={conversation}/>
         </div>
-
     )
 }

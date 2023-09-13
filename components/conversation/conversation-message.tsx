@@ -8,6 +8,7 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {ChevronLeft, MoreHorizontal, Image, PlusCircle, SendHorizonal, Mic} from "lucide-react";
 import {Input} from "@/components/ui/input";
 import {cn} from "@/lib/utils";
+import {ScrollArea} from "@/components/ui/scroll-area";
 
 
 interface ConversationItemProps {
@@ -22,28 +23,28 @@ export const ConversationMessage =  ({
     return (
         <div>
             <div className={cn('flex my-2 p-3 cursor-pointer rounded-lg items-end', role === 'sender' ? 'flex-row-reverse text-right items-end' : 'flex-row')}>
-                <div className={'w-10 h-10 relative'}>
-                    <Avatar>
-                        <AvatarImage className={'shadow-lg shadow-black'} src="/placeholder.jpg" />
-                        <AvatarFallback className={'shadow-lg shadow-black'} ></AvatarFallback>
-                    </Avatar>
-                </div>
-                <div className={cn("flex flex-col", role === 'sender' && 'items-end')}>
-                    <div className={cn('rounded-2xl p-3 mx-3 mb-2 w-fit', role === 'sender' ? 'bg-primary' : 'bg-primary/50')}>
-                        <div className="">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci alias aliquid a Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci alias aliquid a Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci alias aliquid a
+                    <div className={'w-10 h-10 relative'}>
+                        <Avatar>
+                            <AvatarImage className={'shadow-lg shadow-black'} src="/placeholder.jpg" />
+                            <AvatarFallback className={'shadow-lg shadow-black'} ></AvatarFallback>
+                        </Avatar>
+                    </div>
+                    <div className={cn("flex flex-col", role === 'sender' && 'items-end')}>
+                        <div className={cn('rounded-2xl p-3 mx-3 mb-2 w-fit', role === 'sender' ? 'bg-primary' : 'bg-primary/30')}>
+                            <div className="">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci alias aliquid a Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci alias aliquid a Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci alias aliquid a
+                            </div>
+                        </div>
+                        <div className={cn('rounded-2xl p-3 mx-3 mb-2 w-fit', role === 'sender' ? 'bg-primary' : 'bg-primary/30')}>
+                                message
+                        </div>
+
+                        <div className={'mx-4 text-xs text-muted-foreground'}>
+                            12:30 AM
                         </div>
                     </div>
-                    <div className={cn('rounded-2xl p-3 mx-3 mb-2 w-fit', role === 'sender' ? 'bg-primary' : 'bg-primary/50')}>
-                            message
-                    </div>
 
-                    <div className={'mx-4 text-xs text-muted-foreground'}>
-                        12:30 AM
-                    </div>
                 </div>
-
-            </div>
         </div>
 
     )

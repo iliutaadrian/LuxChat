@@ -6,11 +6,10 @@ import {cn} from "@/lib/utils";
 import {ModeToggle} from "@/components/mode-toggle";
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
+import useConversations from "@/hooks/useConversations";
 
 export const DesktopSidebar = () => {
     const routes = useRoutes()
-    const [isOpened, setIsOpened] = useState(false)
-
 
     const [isMounted, setMounted] = useState(false)
     useEffect(() => {
@@ -20,7 +19,7 @@ export const DesktopSidebar = () => {
     if(!isMounted) return null
 
     return (
-        <div className="md:fixed lg:w-20 z-20 inset-y-0 left-0 border-r-2 border-muted-foreground w-16 align-middle flex flex-col items-center">
+        <div className={"md:fixed lg:w-20 z-20 inset-y-0 left-0 border-r-2 border-muted-foreground w-16 align-middle flex flex-col items-center"}>
             <nav>
                 <ul role={'list'}>
                     {routes.map((route) => {
@@ -33,8 +32,8 @@ export const DesktopSidebar = () => {
                             </li>
                         )
                     })}
-                    <li className={'text-center'}>
-                        <ModeToggle className={"mx-auto my-5 gap-x-3 rounded-xl cursor-pointer w-12 h-12 flex flex-col align-middle justify-center text-center"}/>
+                    <li className={'text-center mx-auto my-5 gap-x-3 rounded-xl cursor-pointer w-12 h-12 flex flex-col align-middle justify-center'}>
+                        <ModeToggle/>
                     </li>
                 </ul>
             </nav>
