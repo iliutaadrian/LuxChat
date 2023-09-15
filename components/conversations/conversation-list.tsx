@@ -9,10 +9,11 @@ import {UserItem} from "@/components/user/user-item";
 import {ConversationsItem} from "@/components/conversations/conversations-item";
 import useConversations from "@/hooks/useConversations";
 import {cn} from "@/lib/utils";
+import {FullConversationType, FullMessageType} from "@/types";
 
 
 interface ConversationListProps {
-    conversations: Conversation[],
+    conversations: FullConversationType[],
 }
 
 const ConversationList = ({conversations}:ConversationListProps) => {
@@ -21,7 +22,7 @@ const ConversationList = ({conversations}:ConversationListProps) => {
 
 
     return (
-        <div className={cn('flex flex-col gap-5' , isOpen && 'hidden md:block')}>
+        <div className={cn('flex flex-col gap-5 md:flex md:px-2' , isOpen && 'hidden')}>
             <h1 className={'text-xl font-bold'}> Messages </h1>
             {conversations?.map(conv=>{
                 return (

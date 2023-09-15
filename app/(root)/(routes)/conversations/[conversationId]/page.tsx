@@ -1,7 +1,6 @@
-// "use client"
-
 import getConversation from "@/actions/getConversation";
 import {ConversationItem} from "@/components/conversation/conversation-item";
+import {useSession} from "next-auth/react";
 
 interface ConversationIdParams{
     conversationId: string,
@@ -9,20 +8,14 @@ interface ConversationIdParams{
 const ConversationPage = async ({ params }:{ params:ConversationIdParams }) => {
     const conversation = await getConversation(params.conversationId)
 
-    if (!conversation) {
-        return (
-            <div className="lg:pl-80 h-full">
-                <div className="h-full flex flex-col">
-                    No messages
-                </div>
-            </div>
-        )
+    if(!conversation){
+        return <div>Loading...</div>
     }
-
+    console.log(1)
     return (
-        <div>
+        <>
             <ConversationItem conversation={conversation} />
-        </div>
+        </>
     )
 }
 

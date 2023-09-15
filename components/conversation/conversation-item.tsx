@@ -6,6 +6,9 @@ import {Conversation, User} from "@prisma/client";
 import {ConversationHeader} from "@/components/conversation/conversation-header";
 import {ConversationBody} from "@/components/conversation/conversation-body";
 import {ConversationInput} from "@/components/conversation/conversation-input";
+import useOtherUser from "@/hooks/useOtherUser";
+import {useSession} from "next-auth/react";
+import getSession from "@/actions/getSession";
 
 
 interface ConversationItemProps {
@@ -18,12 +21,14 @@ export const ConversationItem =  ({
    conversation
 }:ConversationItemProps) => {
     const router = useRouter()
+    const otherUser = useOtherUser(conversation)
     const [isLoading, setIsLoading] = useState(false)
 
     const handleClick = useCallback(()=>{
         router.push(`/conversations/${conversation.id}`);
 
     }, [conversation.id, router])
+
 
     return (
         <div className={'relative h-full bg-background'}>

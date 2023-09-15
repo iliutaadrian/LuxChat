@@ -17,7 +17,7 @@ export const UserList = ({users}:UserListProps) => {
     const [isLoading, setIsLoading] = useState(false)
 
     return (
-        <div className={'flex flex-col gap-5 h-full'}>
+        <div className={'flex flex-col gap-5 h-full p-2'}>
             <h1 className={'text-xl font-bold'}> People </h1>
             <ScrollArea >
                 <div className={'flex flex-col gap-5 h-screen'}>

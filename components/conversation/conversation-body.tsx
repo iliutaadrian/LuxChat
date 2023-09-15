@@ -16,8 +16,8 @@ interface ConversationItemProps {
 }
 
 export const ConversationBody =  ({
-                                      conversation
-                                  }:ConversationItemProps) => {
+  conversation
+}:ConversationItemProps) => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
 
@@ -31,9 +31,6 @@ export const ConversationBody =  ({
             <div className={'flex flex-col items-start h-full'}>
                 <ScrollArea>
                     <ConversationMessage conversation={conversation} role={'sender'}/>
-                    <ConversationMessage conversation={conversation} role={'receiver'}/>
-                    <ConversationMessage conversation={conversation} role={'receiver'}/>
-                    <ConversationMessage conversation={conversation} role={'receiver'}/>
                     <ConversationMessage conversation={conversation} role={'receiver'}/>
                 </ScrollArea>
             </div>

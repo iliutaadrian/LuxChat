@@ -3,7 +3,7 @@
 import {useRouter} from "next/navigation";
 import {useCallback, useState} from "react";
 import axios from "axios";
-import {  Conversation } from "@prisma/client";
+import {Conversation, User} from "@prisma/client";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {ChevronLeft, MoreHorizontal, Image, PlusCircle, SendHorizonal, Mic} from "lucide-react";
 import {Input} from "@/components/ui/input";
@@ -11,12 +11,13 @@ import Link from "next/link";
 
 
 interface ConversationItemProps {
-    conversation: Conversation
+    conversation: Conversation & {
+        users: User[]
+    }
 }
-
 export const ConversationHeader =  ({
-                                      conversation
-                                  }:ConversationItemProps) => {
+    conversation
+}:ConversationItemProps) => {
     return (
         <div className={'sticky top-0 bg-secondary z-20'}>
             <div className={'flex flex-row px-5 py-3 justify-between align-middle items-center border-b-2 border-muted-foreground'}>
@@ -33,7 +34,7 @@ export const ConversationHeader =  ({
     </div>
     <div className={'flex flex-col ml-2'}>
         <p className={'text-md font-medium'}>
-            Alex Smith
+
         </p>
         <span className={'text-xs text-muted-foreground'}>Active</span>
     </div>

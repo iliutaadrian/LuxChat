@@ -11,8 +11,6 @@ export async function POST(
         const body = await request.json();
         const { userId, isGroup, members, name } = body;
 
-        console.log(isGroup)
-
         if (!currentUser?.id || !currentUser?.username) {
             return new NextResponse('Unauthorized', {status: 401})
         }
