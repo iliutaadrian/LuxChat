@@ -55,40 +55,43 @@ export const ConversationInput =  ({
 
     return (
         <div className={'sticky pb-10 md:pb-0 bottom-0 w-full bg-secondary'}>
-            <div className={'z-20 border-t-2 border-muted-foreground w-full align-middle flex flex-row items-center h-20 gap-4 px-4'}>
-                <Button
-                    variant={'ghost'}
-                    disabled={isLoading}
-                    className={'bg-muted-foreground/50 hover:bg-muted-foreground rounded-full p-2 cursor-pointer'}
-                >
-                    <Mic/>
-                </Button>
+            <form onSubmit={sendMessage}>
+                <div className={'z-20 border-t-2 border-muted-foreground w-full align-middle flex flex-row items-center h-20 gap-4 px-4'}>
+                    <Button
+                        variant={'ghost'}
+                        disabled={isLoading}
+                        className={'bg-muted-foreground/50 hover:bg-muted-foreground rounded-full p-2 cursor-pointer'}
+                    >
+                        <Mic/>
+                    </Button>
 
-                <CldUploadButton
-                    options={{ maxFiles: 1 }}
-                    onUpload={(res) => {handleUpload(res)}}
-                    uploadPreset='atnv4tk5'
-                    className={'bg-muted-foreground/50 hover:bg-muted-foreground rounded-full p-2 cursor-pointer'}>
-                    <Image/>
-                </CldUploadButton>
+                    <CldUploadButton
+                        options={{ maxFiles: 1 }}
+                        onUpload={(res) => {handleUpload(res)}}
+                        uploadPreset='atnv4tk5'
+                        className={'bg-muted-foreground/50 hover:bg-muted-foreground rounded-full p-2 cursor-pointer'}>
+                        <Image/>
+                    </CldUploadButton>
 
-                <Input
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    className={'rounded-2xl border'}
-                    placeholder={'Send a message...'}
-                    disabled={isLoading}/>
+                    <Input
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        className={'rounded-2xl border'}
+                        placeholder={'Send a message...'}
+                        disabled={isLoading}/>
 
-                <Button
-                    onClick={sendMessage}
-                    variant={'ghost'}
-                    disabled={isLoading}
-                    className={'bg-primary/70 hover:bg-primary rounded-full p-2 cursor-pointer'}
-                >
-                    <SendHorizonal/>
-                </Button>
+                    <Button
+                        onClick={sendMessage}
+                        variant={'ghost'}
+                        disabled={isLoading}
+                        type={'submit'}
+                        className={'bg-primary/70 hover:bg-primary rounded-full p-2 cursor-pointer'}
+                    >
+                        <SendHorizonal/>
+                    </Button>
 
-            </div>
+                </div>
+            </form>
         </div>
 
     )

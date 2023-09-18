@@ -9,6 +9,7 @@ import {ChevronLeft, MoreHorizontal, Image, PlusCircle, SendHorizonal, Mic} from
 import {Input} from "@/components/ui/input";
 import {ConversationMessage} from "@/components/conversation/conversation-message";
 import {ScrollArea} from "@/components/ui/scroll-area";
+import {useSession} from "next-auth/react";
 
 
 interface ConversationItemProps {
@@ -26,12 +27,21 @@ export const ConversationBody =  ({
 
     }, [conversation.id, router])
 
+
     return (
         <div>
             <div className={'flex flex-col items-start h-full'}>
-                <ScrollArea>
-                    <ConversationMessage conversation={conversation} role={'sender'}/>
-                    <ConversationMessage conversation={conversation} role={'receiver'}/>
+                <ScrollArea className="w-full h-full">
+                    {/*@ts-ignore*/}
+                    {conversation?.messages?.map((message) => {
+                        return (
+                            <>
+                                <ConversationMessage
+                                    message={message}
+                                />
+                            </>
+                        )
+                    })}
                 </ScrollArea>
             </div>
 

@@ -17,6 +17,15 @@ const getConversation = async (conversationId:string) => {
             },
             include: {
                 users: true,
+                messages: {
+                    include: {
+                        sender: true,
+                        seen: true,
+                    },
+                    orderBy: {
+                        createdAt: 'asc'
+                    }
+                }
             },
         })
 

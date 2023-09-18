@@ -8,6 +8,7 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {ChevronLeft, MoreHorizontal, Image, PlusCircle, SendHorizonal, Mic} from "lucide-react";
 import {Input} from "@/components/ui/input";
 import Link from "next/link";
+import useOtherUser from "@/hooks/useOtherUser";
 
 
 interface ConversationItemProps {
@@ -18,6 +19,8 @@ interface ConversationItemProps {
 export const ConversationHeader =  ({
     conversation
 }:ConversationItemProps) => {
+    const otherUser = useOtherUser(conversation)
+
     return (
         <div className={'sticky top-0 bg-secondary z-20'}>
             <div className={'flex flex-row px-5 py-3 justify-between align-middle items-center border-b-2 border-muted-foreground'}>
@@ -34,13 +37,13 @@ export const ConversationHeader =  ({
     </div>
     <div className={'flex flex-col ml-2'}>
         <p className={'text-md font-medium'}>
-
+            {otherUser?.username}
         </p>
         <span className={'text-xs text-muted-foreground'}>Active</span>
     </div>
-</div>
-    <MoreHorizontal className={'text-primary hover:text-primary-foreground text-right cursor-pointer'}/>
-</div>
+    </div>
+        <MoreHorizontal className={'text-primary hover:text-primary-foreground text-right cursor-pointer'}/>
+    </div>
         </div>
 
     )

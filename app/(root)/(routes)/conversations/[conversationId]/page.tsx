@@ -11,7 +11,6 @@ const ConversationPage = async ({ params }:{ params:ConversationIdParams }) => {
     if(!conversation){
         return <div>Loading...</div>
     }
-    console.log(1)
     return (
         <>
             <ConversationItem conversation={conversation} />

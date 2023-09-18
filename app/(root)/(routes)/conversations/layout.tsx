@@ -12,7 +12,7 @@ export default async function RoutesLayout({
     const conversations = await getConversations()
 
     return (
-        <div className="h-full">
+        <div className="h-screen">
             <div className={'hidden w-full md:flex flex-col md:w-80 fixed min-h-full p-5 border-muted-foreground md:border-r-2 md:ml-16'}>
                 <DesktopSidebar/>
             </div>

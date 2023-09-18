@@ -20,8 +20,6 @@ export const ConversationsItem =  ({
 }:ConversationItemProps) => {
     const router = useRouter()
     const otherUser = useOtherUser(conversation)
-    console.log(useSession())
-    console.log(otherUser)
     const [isLoading, setIsLoading] = useState(false)
 
     const handleClick = useCallback(()=>{

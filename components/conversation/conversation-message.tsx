@@ -1,25 +1,25 @@
 "use client"
 
-import {useRouter} from "next/navigation";
-import {useCallback, useState} from "react";
-import axios from "axios";
-import {  Conversation } from "@prisma/client";
+import {Conversation, Message} from "@prisma/client";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import {ChevronLeft, MoreHorizontal, Image, PlusCircle, SendHorizonal, Mic} from "lucide-react";
-import {Input} from "@/components/ui/input";
 import {cn} from "@/lib/utils";
 import {ScrollArea} from "@/components/ui/scroll-area";
+import { format } from 'date-fns';
+import {useSession} from "next-auth/react";
+import Image from 'next/image'
 
 
 interface ConversationItemProps {
-    conversation: Conversation,
-    role: 'sender' | 'receiver'
+    message: Message,
 }
 
 export const ConversationMessage =  ({
-                                         conversation,
-                                         role
+                                         message,
 }:ConversationItemProps) => {
+    const session = useSession()
+    // @ts-ignore
+    const role = session?.data?.user?.username === message?.sender?.username ? 'sender' : 'reciever'
+
     return (
         <div>
             <div className={cn('flex my-2 p-3 cursor-pointer rounded-lg items-end', role === 'sender' ? 'flex-row-reverse text-right items-end' : 'flex-row')}>
@@ -32,15 +32,22 @@ export const ConversationMessage =  ({
                     <div className={cn("flex flex-col", role === 'sender' && 'items-end')}>
                         <div className={cn('rounded-2xl p-3 mx-3 mb-2 w-fit', role === 'sender' ? 'bg-primary' : 'bg-primary/30')}>
                             <div className="">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci alias aliquid a Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci alias aliquid a Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci alias aliquid a
+                                {message.body}
+
+                                {message?.image && (
+                                    <Image
+                                        src={message?.image}
+                                        width={300}
+                                        height={300}
+                                        alt={message?.id}
+                                    />
+                                )}
                             </div>
                         </div>
-                        <div className={cn('rounded-2xl p-3 mx-3 mb-2 w-fit', role === 'sender' ? 'bg-primary' : 'bg-primary/30')}>
-                                message
-                        </div>
 
-                        <div className={'mx-4 text-xs text-muted-foreground'}>
-                            12:30 AM
+                        <div className={'mx-4 text-xs pb-1'}>
+                            {/*@ts-ignore*/}
+                            {message.sender.username} <span className={'text-muted-foreground'}>{format(message.createdAt, 'yyyy/MM/dd kk:mm')}</span>
                         </div>
                     </div>
 
