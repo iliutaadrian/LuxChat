@@ -20,7 +20,7 @@ export default async function RoutesLayout({
             <div className={'flex w-full md:flex flex-col md:w-80 fixed min-h-full p-5 border-muted-foreground md:border-r-2 md:ml-16'}>
                 <UserList users={users}/>
             </div>
-            <div className={"lg:block md:pl-80 h-full"}>
+            <div className={"md:pl-96 md:flex hidden h-full  align-middle items-center justify-center font-semibold text-xl text-muted-foreground"}>
                 {children}
             </div>
 

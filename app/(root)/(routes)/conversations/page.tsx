@@ -1,6 +1,7 @@
 const ConversationsPage = () => {
     return (
-        <div>
+        <div className="h-full md:flex hidden align-middle items-center justify-center font-semibold text-xl text-muted-foreground">
+            Select a conversation to start chatting
         </div>
     )
 }

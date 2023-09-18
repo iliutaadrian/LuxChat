@@ -11,7 +11,6 @@ import {ConversationMessage} from "@/components/conversation/conversation-messag
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {useSession} from "next-auth/react";
 
-
 interface ConversationItemProps {
     conversation: Conversation
 }

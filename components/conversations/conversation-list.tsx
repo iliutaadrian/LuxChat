@@ -10,6 +10,7 @@ import {ConversationsItem} from "@/components/conversations/conversations-item";
 import useConversations from "@/hooks/useConversations";
 import {cn} from "@/lib/utils";
 import {FullConversationType, FullMessageType} from "@/types";
+import {ScrollArea} from "@/components/ui/scroll-area";
 
 
 interface ConversationListProps {
@@ -22,13 +23,17 @@ const ConversationList = ({conversations}:ConversationListProps) => {
 
 
     return (
-        <div className={cn('flex flex-col gap-5 md:flex md:px-2' , isOpen && 'hidden')}>
+        <div className={cn('flex flex-col gap-5 h-full p-2')}>
             <h1 className={'text-xl font-bold'}> Messages </h1>
-            {conversations?.map(conv=>{
-                return (
-                    <ConversationsItem conversation={conv} key={conv.id}/>
-                )
-            })}
+            <ScrollArea >
+                <div className={'flex flex-col gap-5 h-screen'}>
+                    {conversations?.map(conv=>{
+                        return (
+                            <ConversationsItem conversation={conv} key={conv.id}/>
+                        )
+                    })}
+                </div>
+            </ScrollArea>
         </div>
     )
 }
