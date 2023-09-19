@@ -7,17 +7,17 @@ import {ScrollArea} from "@/components/ui/scroll-area";
 import { format } from 'date-fns';
 import {useSession} from "next-auth/react";
 import Image from 'next/image'
+import {FullMessageType} from "@/types";
 
 
 interface ConversationItemProps {
-    message: Message,
+    message: FullMessageType,
 }
 
 export const ConversationMessage =  ({
                                          message,
 }:ConversationItemProps) => {
     const session = useSession()
-    // @ts-ignore
     const role = session?.data?.user?.username === message?.sender?.username ? 'sender' : 'reciever'
 
     return (
@@ -46,8 +46,7 @@ export const ConversationMessage =  ({
                         </div>
 
                         <div className={'mx-4 text-xs pb-1'}>
-                            {/*@ts-ignore*/}
-                            {message.sender.username} <span className={'text-muted-foreground'}>{format(message.createdAt, 'yyyy/MM/dd kk:mm')}</span>
+                            {message.sender.username} <span className={'text-muted-foreground'}>{format(new Date(message?.createdAt), 'yyyy/MM/dd kk:mm')}</span>
                         </div>
                     </div>
 

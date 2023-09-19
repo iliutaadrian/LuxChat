@@ -9,12 +9,11 @@ import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTri
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {format} from "date-fns";
 import {ProfileDrawer} from "@/components/profile-drawer";
+import {FullConversationType, FullMessageType} from "@/types";
 
 
 interface ConversationItemProps {
-    conversation: Conversation & {
-        users: User[]
-    }
+    conversation: FullConversationType
 }
 
 export const ConversationHeader = ({

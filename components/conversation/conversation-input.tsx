@@ -16,39 +16,34 @@ interface ConversationItemProps {
 }
 
 export const ConversationInput =  ({
-   conversation
+                                       conversation
 }:ConversationItemProps) => {
-    const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
     const [message, setMessage] = useState('')
 
-    const sendMessage = useCallback(() => {
-        if (message.length < 1) return
-        setIsLoading(true)
+    const sendMessage = (e:any) => {
+        e.preventDefault();
+
+        if (message.length < 1) return;
+        setIsLoading(true);
+
         axios.post(`/api/messages`, {
             message: message,
             conversationId: conversation.id,
-        }).then(res => {
-            setMessage('')
-            toast({
-                title: res.data,
-            })
-        }).finally(() => {
-            setIsLoading(false)
-        })
-    }, [message]);
+        }).then((res) => {
+            setMessage('');
+            setIsLoading(false);
+        }).catch((error) => {
+            setIsLoading(false);
+            console.error('Error sending message:', error);
+        });
+    };
 
     const handleUpload = (result:any) => {
         setIsLoading(true)
         axios.post(`/api/messages`, {
             image: result?.info?.secure_url,
             conversationId: conversation.id
-        }).then(res => {
-            toast({
-                title: res.data,
-            })
-        }).finally(() => {
-            setIsLoading(false)
         })
     }
 
@@ -81,15 +76,13 @@ export const ConversationInput =  ({
                         disabled={isLoading}/>
 
                     <Button
-                        onClick={sendMessage}
                         variant={'ghost'}
-                        disabled={isLoading}
+                        disabled={isLoading || message.length < 1}
                         type={'submit'}
                         className={'bg-primary/70 hover:bg-primary rounded-full p-2 cursor-pointer'}
                     >
                         <SendHorizonal/>
                     </Button>
-
                 </div>
             </form>
         </div>
