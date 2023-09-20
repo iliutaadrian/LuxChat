@@ -50,7 +50,7 @@ const ConversationList = ({initialConversations}:ConversationListProps) => {
             pusherClient.unbind('conversation-update', updateConversation)
             pusherClient.unsubscribe(`user-${userId}`)
         }
-    }, [])
+    }, [userId])
 
     return (
         <div className={cn('flex flex-col gap-5 h-full p-2')}>

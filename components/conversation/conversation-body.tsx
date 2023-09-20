@@ -49,7 +49,7 @@ export const ConversationBody =  ({
             pusherClient.unbind( 'new-message', messageHandler)
             pusherClient.unsubscribe(`conversation-${conversationId}`)
         }
-    }, [])
+    }, [conversationId])
 
     return (
         <div className={'flex flex-col items-start h-screen'}>

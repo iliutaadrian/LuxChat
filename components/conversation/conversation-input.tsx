@@ -3,7 +3,7 @@
 import {useRouter} from "next/navigation";
 import {useCallback, useState} from "react";
 import {  Conversation } from "@prisma/client";
-import {ChevronLeft, MoreHorizontal, Image, PlusCircle, SendHorizonal, Mic} from "lucide-react";
+import {ChevronLeft, MoreHorizontal, Image, PlusCircle, SendHorizonal, Mic, ImageIcon} from "lucide-react";
 import {Input} from "@/components/ui/input";
 import {toast} from "@/components/ui/use-toast";
 import axios from "axios";
@@ -65,7 +65,7 @@ export const ConversationInput =  ({
                         onUpload={(res) => {handleUpload(res)}}
                         uploadPreset='atnv4tk5'
                         className={'bg-muted-foreground/50 hover:bg-muted-foreground rounded-full p-2 cursor-pointer'}>
-                        <Image/>
+                        <ImageIcon/>
                     </CldUploadButton>
 
                     <Input
