@@ -7,6 +7,8 @@ import {ModeToggle} from "@/components/mode-toggle";
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import useConversations from "@/hooks/useConversations";
+import {signOut} from "next-auth/react";
+import {HiArrowLeftOnRectangle} from "react-icons/hi2";
 
 export const DesktopSidebar = () => {
     const routes = useRoutes()
@@ -26,7 +28,7 @@ export const DesktopSidebar = () => {
                         return (
                             <li key={route.label} onClick={route?.onClick}>
                                 <Link href={route.href} className={cn("mx-2 my-5 gap-x-3 rounded-xl cursor-pointer w-12 h-12 flex flex-col align-middle justify-center hover:bg-muted", route.active && `bg-muted-foreground/30`)}>
-                                    <route.icon className={'w-8 h-8 mx-auto p-1'} />
+                                    <route.icon className={`w-8 h-8 mx-auto p-1 text-primary`}  />
                                     <span className={'sr-only'}>{route.label}</span>
                                 </Link>
                             </li>
@@ -34,6 +36,11 @@ export const DesktopSidebar = () => {
                     })}
                     <li className={'text-center mx-auto my-5 gap-x-3 rounded-xl cursor-pointer w-12 h-12 flex flex-col align-middle justify-center'}>
                         <ModeToggle/>
+                    </li>
+                    <li className={'text-center mx-auto my-5 gap-x-3 rounded-xl cursor-pointer w-12 h-12 flex flex-col align-middle justify-center'}>
+                        <Button variant={'ghost'} onClick={() => signOut()} className={'text-center mx-auto my-5 gap-x-3 rounded-xl cursor-pointer w-12 h-12 flex flex-col align-middle justify-center'}>
+                            <HiArrowLeftOnRectangle className={'w-8 h-8 mx-auto p-1'} />
+                        </Button>
                     </li>
                 </ul>
             </nav>

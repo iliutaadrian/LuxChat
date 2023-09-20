@@ -7,6 +7,7 @@ import {useRouter} from "next/navigation";
 import {  User } from "@prisma/client";
 import {UserItem} from "@/components/user/user-item";
 import {ScrollArea} from "@/components/ui/scroll-area";
+import {MailPlus, UserPlus} from "lucide-react";
 
 
 interface UserListProps {
@@ -18,7 +19,11 @@ export const UserList = ({users}:UserListProps) => {
 
     return (
         <div className={'flex flex-col gap-5 h-full p-2'}>
-            <h1 className={'text-xl font-bold'}> People </h1>
+            <div className="flex flex-row justify-between items-center">
+                <h1 className={'text-xl font-bold'}> People </h1>
+                <UserPlus
+                    className="w-6 h-6 cursor-pointer"/>
+            </div>
             <ScrollArea >
                 <div className={'flex flex-col gap-5 h-screen'}>
                     {users?.map(user=>{

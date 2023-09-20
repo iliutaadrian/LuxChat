@@ -20,11 +20,9 @@ export const ConversationsItem =  ({
 }:ConversationItemProps) => {
     const router = useRouter()
     const otherUser = useOtherUser(conversation)
-    const [isLoading, setIsLoading] = useState(false)
 
     const handleClick = useCallback(()=>{
         router.push(`/conversations/${conversation.id}`);
-
     }, [conversation.id, router])
 
 

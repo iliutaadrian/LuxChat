@@ -18,7 +18,7 @@ export default async function RoutesLayout({
             </div>
 
             <div className={'flex w-full md:flex flex-col md:w-80 fixed min-h-full p-5 border-muted-foreground md:border-r-2 md:ml-16'}>
-                <ConversationList conversations={conversations}/>
+                <ConversationList initialConversations={conversations}/>
             </div>
 
             <div className={"md:pl-96 h-full"}>
