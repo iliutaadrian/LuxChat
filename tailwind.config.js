@@ -16,6 +16,15 @@ module.exports = {
       },
     },
     extend: {
+      dropShadow: {
+        glow: [
+          "0 0px 20px rgba(255,255, 255, 0.35)",
+          "0 0px 65px rgba(255, 255,255, 0.2)"
+        ]
+      },
+      backgroundColor: {
+        'gradient-vedeta': 'radial-gradient(ellipse at top, var(--tw-gradient-stops)) var(--primary)/60 var(--background)',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

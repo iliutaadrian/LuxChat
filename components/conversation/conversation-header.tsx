@@ -31,9 +31,7 @@ export const ConversationHeader = ({
                     </Link>
                     <div className={'w-10 h-10 relative'}>
                         <Avatar>
-                            <AvatarImage className={'shadow-lg shadow-black'} src="/placeholder.jpg" alt="conversation"
-                                         width={'8'} height={'8'}/>
-                            <AvatarFallback className={'shadow-lg shadow-black'}></AvatarFallback>
+                            <AvatarFallback className={'border border-primary'}>{otherUser.username.charAt(0).toUpperCase()}</AvatarFallback>
                         </Avatar>
                         <span
                             className={'absolute top-0 right-0 bg-green-500 w-3 h-3 rounded-full shadow-xl shadow-black'}> </span>

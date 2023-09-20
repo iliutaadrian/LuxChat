@@ -42,6 +42,11 @@ export const DesktopSidebar = () => {
                             <HiArrowLeftOnRectangle className={'w-8 h-8 mx-auto p-1'} />
                         </Button>
                     </li>
+
+
+
+
+                    make dropdown here
                 </ul>
             </nav>
         </div>

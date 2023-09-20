@@ -32,8 +32,7 @@ export const UserItem =  ({
         <div onClick={handleClick} className={'flex flex-row gap-3 p-4 cursor-pointer align-middle items-center rounded-lg bg-muted hover:bg-muted-foreground'}>
             <div className={'w-10 h-10 relative'}>
                 <Avatar>
-                    <AvatarImage className={'shadow-lg shadow-black'} src="/placeholder.jpg" alt="user" />
-                    <AvatarFallback>CN</AvatarFallback>
+                    <AvatarFallback className={'border border-primary'}>{user.username.charAt(0).toUpperCase()}</AvatarFallback>
                 </Avatar>
                 <span className={'absolute top-0 right-0 bg-green-500 w-3 h-3 rounded-full shadow-xl shadow-black'}> </span>
             </div>

@@ -11,7 +11,7 @@ export default async function RootLayout({
 }) {
 
     return (
-        <div className="h-full">
+        <div className="h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 to-background">
             {children}
         </div>
     )

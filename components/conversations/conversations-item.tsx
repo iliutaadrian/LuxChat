@@ -46,10 +46,9 @@ export const ConversationsItem =  ({
         <div onClick={handleClick} className={'flex flex-row gap-2 p-4 cursor-pointer align-middle items-center rounded-lg bg-muted hover:bg-muted-foreground/20'}>
             <div className={'w-10 h-10 relative'}>
                 <Avatar>
-                    <AvatarImage className={'shadow-lg shadow-black'} src="/placeholder.jpg" alt="conversation" />
-                    <AvatarFallback className={'shadow-lg shadow-black'} ></AvatarFallback>
+                    <AvatarFallback className={'border border-primary'}>{otherUser.username.charAt(0).toUpperCase()}</AvatarFallback>
                 </Avatar>
-                <span className={'absolute top-0 right-0 bg-green-500 w-3 h-3 rounded-full shadow-xl shadow-black'}> </span>
+                <span className={'absolute top-0 right-0 even:bg-green-500 bg-slate-500 w-3 h-3 rounded-full shadow-xl shadow-black'}> </span>
             </div>
             <div className={'flex flex-col'}>
                 <p className={'ml-2 text-sm font-medium'}>

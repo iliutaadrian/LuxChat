@@ -4,7 +4,7 @@ import useConversations from "@/hooks/useConversations";
 import {HiChat, HiUsers} from "react-icons/hi";
 import {signOut} from "next-auth/react";
 import {HiArrowLeftOnRectangle} from "react-icons/hi2";
-import {Trash2} from "lucide-react";
+import {Cog, Radiation, Trash2} from "lucide-react";
 
 const useRoutes = () => {
     const pathname = usePathname()
@@ -27,10 +27,17 @@ const useRoutes = () => {
             color: 'green'
         },
         {
-            label: 'AutoDestroy',
-            href: '/destroy',
-            icon: Trash2,
-            active: pathname === '/destroy',
+            label: 'Settings',
+            href: '/settings',
+            icon: Cog,
+            active: pathname === '/settings',
+            color: 'green'
+        },
+        {
+            label: 'Nuclear',
+            href: '/nuclear',
+            icon: Radiation,
+            active: pathname === '/nuclear',
             color: 'red'
         }
     ], [pathname, conversationId])

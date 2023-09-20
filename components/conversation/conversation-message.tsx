@@ -25,8 +25,7 @@ export const ConversationMessage =  ({
             <div className={cn('flex my-2 p-3 cursor-pointer rounded-lg items-end', role === 'sender' ? 'flex-row-reverse text-right items-end' : 'flex-row')}>
                     <div className={'w-10 h-10 relative'}>
                         <Avatar>
-                            <AvatarImage className={'shadow-lg shadow-black'} src="/placeholder.jpg" />
-                            <AvatarFallback className={'shadow-lg shadow-black'} ></AvatarFallback>
+                            <AvatarFallback className={'border border-primary'}>{message.sender.username.charAt(0).toUpperCase()}</AvatarFallback>
                         </Avatar>
                     </div>
                     <div className={cn("flex flex-col", role === 'sender' && 'items-end')}>

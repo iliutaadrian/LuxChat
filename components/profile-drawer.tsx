@@ -41,12 +41,7 @@ export const ProfileDrawer = ({
                     <SheetDescription className={'flex flex-col items-center align-middle gap-3 pt-10'}>
                         <div className={'w-20 h-20 relative pl-1'}>
                             <Avatar className={'w-20 h-20'}>
-                                <AvatarImage
-                                    className={'shadow-lg shadow-black'}
-                                    src="/placeholder.jpg"
-                                    alt="conversation"
-                                    width={'40'} height={'40'}/>
-                                <AvatarFallback className={'shadow-lg shadow-black'}></AvatarFallback>
+                                <AvatarFallback className={'border border-primary text-4xl'}>{user.username.charAt(0).toUpperCase()}</AvatarFallback>
                             </Avatar>
                             <span
                                 className={'absolute top-0 right-0 bg-green-500 border-2 border-primary w-4 h-4 rounded-full shadow-xl shadow-black'}>

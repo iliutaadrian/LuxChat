@@ -89,7 +89,7 @@ const AuthForm = () => {
             <h1 className={'text-center text-xl font-semibold py-5'}>
                 {variant === 'signin' ? "Sign in to your account" : "Create your account"}
             </h1>
-            <div className="h-full p-4 sm:max-w-3xl mx-auto">
+            <div className="h-full md:max-w-3xl mx-auto">
                 <Form {...form}>
                     <form
                         className="space-y-8 pb-10"
@@ -129,7 +129,7 @@ const AuthForm = () => {
                                 )} />
                         </div>
                         <div className="w-full flex justify-center">
-                            <Button variant={'auth'} type="submit" size="lg" disabled={isLoading} >
+                            <Button variant={'ghost'} className={'bg-primary hover:bg-primary/50 w-full'} type="submit" size="lg" disabled={isLoading} >
                                 {variant === 'signin' ? "Login" : "Register"}
                             </Button>
                         </div>
