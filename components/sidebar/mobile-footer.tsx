@@ -17,9 +17,9 @@ export const MobileFooter = () => {
                     {routes.map((route) => {
                         return (
                             <li key={route.label}>
-                                <Link href={route.href} className={cn("mx-2 my-5 gap-x-3 rounded-xl cursor-pointer w-12 h-12 flex flex-col align-middle justify-center hover:bg-muted", route.active && `bg-muted-foreground/30`)}>
-                                    <route.icon className={'w-8 h-8 mx-auto p-1'} />
-                                    <span className={''}>{route.label}</span>
+                                <Link href={route.href} className={cn("rounded-xl cursor-pointer w-14 h-14 flex flex-col align-middle justify-center hover:bg-muted text-center", route.active && `bg-muted-foreground/20`)}>
+                                    <route.icon className={`w-8 h-8 mx-auto p-1 ${route.color}`} />
+                                    <span className={'text-xs text-muted-foreground'}>{route.label}</span>
                                 </Link>
                             </li>
                         )
@@ -29,4 +29,5 @@ export const MobileFooter = () => {
         </div>
     )
 }
-
+// color them
+// make messages page/ card like the root page

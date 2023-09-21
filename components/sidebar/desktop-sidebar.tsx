@@ -9,6 +9,7 @@ import Link from "next/link";
 import useConversations from "@/hooks/useConversations";
 import {signOut} from "next-auth/react";
 import {HiArrowLeftOnRectangle} from "react-icons/hi2";
+import {UserAvatarDropdown} from "@/components/sidebar/user-avatar-dropdown";
 
 export const DesktopSidebar = () => {
     const routes = useRoutes()
@@ -21,34 +22,22 @@ export const DesktopSidebar = () => {
     if(!isMounted) return null
 
     return (
-        <div className={"md:fixed lg:w-20 z-20 inset-y-0 left-0 border-r-2 border-muted-foreground w-16 align-middle flex flex-col items-center"}>
-            <nav>
-                <ul role={'list'}>
-                    {routes.map((route) => {
-                        return (
-                            <li key={route.label}>
-                                <Link href={route.href} className={cn("mx-2 my-5 gap-x-3 rounded-xl cursor-pointer w-12 h-12 flex flex-col align-middle justify-center hover:bg-muted", route.active && `bg-muted-foreground/30`)}>
-                                    <route.icon className={`w-8 h-8 mx-auto p-1 text-primary`}  />
-                                    <span className={'sr-only'}>{route.label}</span>
-                                </Link>
-                            </li>
-                        )
-                    })}
-                    <li className={'text-center mx-auto my-5 gap-x-3 rounded-xl cursor-pointer w-12 h-12 flex flex-col align-middle justify-center'}>
-                        <ModeToggle/>
-                    </li>
-                    <li className={'text-center mx-auto my-5 gap-x-3 rounded-xl cursor-pointer w-12 h-12 flex flex-col align-middle justify-center'}>
-                        <Button variant={'ghost'} onClick={() => signOut()} className={'text-center mx-auto my-5 gap-x-3 rounded-xl cursor-pointer w-12 h-12 flex flex-col align-middle justify-center'}>
-                            <HiArrowLeftOnRectangle className={'w-8 h-8 mx-auto p-1'} />
-                        </Button>
-                    </li>
-
-
-
-
-                    make dropdown here
-                </ul>
-            </nav>
+        <div className={"md:fixed sm:w-20 z-20 inset-y-0 left-0 border-r-2 border-muted-foreground items-center flex flex-col bg-background justify-between py-10"}>
+            <div className="flex flex-col gap-10">
+                {routes.map((route) => {
+                    return (
+                        <div key={route.label}>
+                            <Link href={route.href} className={cn("rounded-xl cursor-pointer w-16 h-16 flex flex-col align-middle justify-center hover:bg-muted text-center", route.active && `bg-muted-foreground/20`)}>
+                                <route.icon className={`w-10 h-10 mx-auto p-1 ${route.color}`} />
+                                <span className={'text-xs text-muted-foreground'}>{route.label}</span>
+                            </Link>
+                        </div>
+                    )
+                })}
+            </div>
+            <div className="flex justify-center">
+                <UserAvatarDropdown/>
+            </div>
         </div>
     )
 }

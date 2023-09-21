@@ -1,6 +1,9 @@
 import React from 'react';
 import {Coffee, Key, MessageCircle, User} from "lucide-react";
 import Link from "next/link";
+import {
+    pickFontFileForFallbackGeneration
+} from "next/dist/compiled/@next/font/dist/local/pick-font-file-for-fallback-generation";
 
 function HeroSection() {
     const rules = [
@@ -25,6 +28,7 @@ function HeroSection() {
             description: 'Lux Chat features a Messenger-like UI for discreet messaging.',
         },
     ];
+    const route = []
 
     return (
         <div className="relative min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/40 to-background">
@@ -49,7 +53,7 @@ function HeroSection() {
                     <div className="mt-4 text-sm text-center">
                         <ul className="list-none px-4 grid grid-cols-1 md:grid-cols-2 gap-5">
                             {rules.map((rule, index) => (
-                                <li key={index} className="p-4 rounded-lg shadow-4xl border-4 border-primary/10 bg-background/50 hover:bg-background group">
+                                <li key={index} className="p-5 rounded-lg shadow-4xl border-4 border-primary/10 bg-background/50 hover:bg-background group">
                                     <div className="flex items-center mb-2">
                                         <div className="mr-2 text-primary group-item">{rule.icon}</div>
                                         <h3 className="text-lg font-semibold group-hover:text-primary">{rule.title}</h3>

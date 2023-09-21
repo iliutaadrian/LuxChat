@@ -18,7 +18,7 @@ export function ModeToggle() {
     };
 
     return (
-        <Button className={cn('rounded-full',theme === 'dark' ? "hover:bg-gray-600/25" : 'hover:bg-white/10')} variant="secondary" size="icon" onClick={toggleTheme}>
+        <Button className={cn('rounded-full',theme === 'dark' ? "hover:bg-gray-600/25" : 'hover:bg-white/10')} variant="ghost" size="icon" onClick={toggleTheme}>
             {theme === 'light' ? (
                 <Moon className="w-5 h-5 transition-all" />
             ) : (

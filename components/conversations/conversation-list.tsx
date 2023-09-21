@@ -53,8 +53,8 @@ const ConversationList = ({initialConversations}:ConversationListProps) => {
     }, [userId])
 
     return (
-        <div className={cn('flex flex-col gap-5 h-full p-2')}>
-            <div className="flex flex-row justify-between items-center">
+        <div className={cn('flex flex-col gap-5 h-full w-full')}>
+            <div className="px-4 flex flex-row justify-between items-center">
                 <h1 className={'text-xl font-bold'}> Messages </h1>
                 <MailPlus
                 className="w-5 h-5 cursor-pointer"/>
