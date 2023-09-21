@@ -29,7 +29,7 @@ export const UserItem =  ({
     }, [user, router])
 
     return (
-        <div onClick={handleClick} className={'flex flex-row gap-3 p-4 cursor-pointer align-middle items-center rounded-lg bg-muted hover:bg-muted-foreground'}>
+        <div onClick={handleClick} className={'flex flex-row gap-2 cursor-pointer align-middle items-center p-5 rounded-lg shadow-4xl border-4 border-primary/10 bg-background/50 hover:bg-background'}>
             <div className={'w-10 h-10 relative'}>
                 <Avatar>
                     <AvatarFallback className={'border border-primary'}>{user.username.charAt(0).toUpperCase()}</AvatarFallback>

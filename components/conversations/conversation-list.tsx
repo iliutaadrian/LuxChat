@@ -60,7 +60,7 @@ const ConversationList = ({initialConversations}:ConversationListProps) => {
                 className="w-5 h-5 cursor-pointer"/>
             </div>
             <ScrollArea >
-                <div className={'flex flex-col gap-5 h-screen'}>
+                <div className={'flex flex-col gap-5'}>
                     {conversations?.map(conv=>{
                         return (
                             <ConversationsItem conversation={conv} key={conv.id}/>

@@ -12,16 +12,10 @@ export default async function RoutesLayout({
     const users = await getUsers()
 
     return (
-        <div className="h-full">
-            <div className={'hidden w-full md:flex flex-col md:w-80 fixed min-h-full p-5 border-muted-foreground md:border-r-2 md:ml-16'}>
-                <DesktopSidebar/>
-            </div>
-
-            <div className={"md:pl-28 md:flex hidden h-full  align-middle items-center justify-center font-semibold text-xl text-muted-foreground"}>
+        <>
+            <div className={"md:pl-20 h-full"}>
                 {children}
             </div>
-
-            <MobileFooter/>
-        </div>
+        </>
     )
 }
