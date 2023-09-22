@@ -9,8 +9,6 @@ export default async function RoutesLayout({
 }: {
     children: React.ReactNode
 }) {
-    const users = await getUsers()
-
     return (
         <>
             <div className={"md:pl-20 h-full"}>

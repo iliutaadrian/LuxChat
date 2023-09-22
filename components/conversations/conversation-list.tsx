@@ -20,45 +20,19 @@ import {AddConversation} from "@/components/conversations/add-conversation";
 
 interface ConversationListProps {
     initialConversations: FullConversationType[],
+    friends: User[]
 }
 
-const ConversationList = ({initialConversations}:ConversationListProps) => {
+const ConversationList = ({initialConversations, friends}:ConversationListProps) => {
     const session = useSession()
     const userId = session?.data?.user?.id
     const [conversations, setConversations] = useState<FullConversationType[]>(initialConversations)
-
-    useEffect(()=>{
-        if (!userId) return
-        pusherClient.subscribe(`user-${userId}`)
-
-        const updateConversation = (conversation: FullConversationType) => {
-            console.log('conversation-update', conversation)
-            // setConversations((current) =>
-            //     current.map((conv) => {
-            //         if (conv.id === conversation.id) {
-            //             return {
-            //                 ...conv,
-            //                 messages: conversation.messages
-            //             }
-            //         }
-            //         return conv
-            //     }))
-        }
-
-        pusherClient.bind('conversation-update', updateConversation)
-
-
-        return () => {
-            pusherClient.unbind('conversation-update', updateConversation)
-            pusherClient.unsubscribe(`user-${userId}`)
-        }
-    }, [userId])
 
     return (
         <div className={cn('flex flex-col gap-5 h-full w-full')}>
             <div className="px-4 flex flex-row justify-between items-center">
                 <h1 className={'text-2xl font-bold'}> Messages </h1>
-                <AddConversation/>
+                <AddConversation friends={friends}/>
             </div>
             <ScrollArea >
                 <div className={'flex flex-col gap-5'}>

@@ -3,7 +3,7 @@ import getCurrentUser from "./getCurrentUser";
 import {NextResponse} from "next/server";
 import {never} from "zod";
 
-const getConversation = async (conversationId:string) => {
+const getConversation = async (conversationId:number) => {
     try{
         const currentUser = await getCurrentUser();
 

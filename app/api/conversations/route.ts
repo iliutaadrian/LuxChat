@@ -42,20 +42,15 @@ export async function POST(
 
         const existingConversation = await prisma.conversation.findMany({
             where: {
-                OR: [
-                    {
-                        userIds: {
-                            equals: [currentUser.id, userId]
-                        }
+                users: {
+                    some: {
+                        id: {
+                            in: [currentUser.id, userId],
+                        },
                     },
-                    {
-                        userIds: {
-                            equals: [userId, currentUser.id]
-                        }
-                    }
-                ]
-            }
-        })
+                },
+            },
+        });
 
         const singleConversation = existingConversation[0];
 
@@ -79,6 +74,7 @@ export async function POST(
 
         return new NextResponse(JSON.stringify(newConversation), {status: 200})
     } catch (error) {
+        console.error(error)
         return new NextResponse('Internal Server Error', {status: 500})
     }
 
