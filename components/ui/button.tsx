@@ -12,7 +12,7 @@ const buttonVariants = cva(
           auth: 'w-full bg-sky-400 rounded-lg hover:bg-sky-500 h-9',
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "bg-background ring-4 ring-red-900/80 hover:bg-destructive/90",
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:

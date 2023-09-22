@@ -14,6 +14,8 @@ import {ScrollArea} from "@/components/ui/scroll-area";
 import {MailPlus} from "lucide-react";
 import {pusherClient} from "@/lib/pusher";
 import {useSession} from "next-auth/react";
+import {Button} from "@/components/ui/button";
+import {AddConversation} from "@/components/conversations/add-conversation";
 
 
 interface ConversationListProps {
@@ -55,9 +57,8 @@ const ConversationList = ({initialConversations}:ConversationListProps) => {
     return (
         <div className={cn('flex flex-col gap-5 h-full w-full')}>
             <div className="px-4 flex flex-row justify-between items-center">
-                <h1 className={'text-xl font-bold'}> Messages </h1>
-                <MailPlus
-                className="w-5 h-5 cursor-pointer"/>
+                <h1 className={'text-2xl font-bold'}> Messages </h1>
+                <AddConversation/>
             </div>
             <ScrollArea >
                 <div className={'flex flex-col gap-5'}>

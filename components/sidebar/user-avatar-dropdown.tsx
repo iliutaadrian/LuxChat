@@ -14,7 +14,7 @@ import {
     DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import {useSession} from "next-auth/react";
+import {signOut, useSession} from "next-auth/react";
 import {ModeToggle} from "@/components/mode-toggle";
 import {HiArrowLeftOnRectangle} from "react-icons/hi2";
 
@@ -30,7 +30,7 @@ export function UserAvatarDropdown() {
                     </Avatar>
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="start" forceMount>
+            <DropdownMenuContent className="w-56 border-primary/50" align="start" forceMount>
                 <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
                         <p className="text-sm font-medium leading-none">{user?.username}</p>
@@ -54,7 +54,7 @@ export function UserAvatarDropdown() {
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={()=>{signOut()}}>
                     Log out
                     <DropdownMenuShortcut><HiArrowLeftOnRectangle className={'w-5 h-5'} /></DropdownMenuShortcut>
                 </DropdownMenuItem>

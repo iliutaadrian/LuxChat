@@ -20,7 +20,7 @@ export const UserList = ({users}:UserListProps) => {
     return (
         <div className={'flex flex-col gap-5 h-full w-full'}>
             <div className="px-4 flex flex-row justify-between items-center">
-                <h1 className={'text-xl font-bold'}> People </h1>
+                <h1 className={'text-2xl font-bold'}> People </h1>
                 <UserPlus
                     className="w-6 h-6 cursor-pointer"/>
             </div>

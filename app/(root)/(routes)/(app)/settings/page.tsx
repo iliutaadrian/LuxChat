@@ -72,22 +72,21 @@ const SettingsPage = () => {
         })
     }
     return (
-        <div className="p-10 flex flex-col gap-5">
+        <div className="p-10 flex flex-col gap-5 max-sm:pb-28">
             <div>
-                <h2 className="text-3xl font-bold tracking-tight">Unique Identifier</h2>
+                <h1 className="text-2xl font-bold">Unique Identifier</h1>
                 <p className="text-primary text-4xl font-medium">
                     {user?.username}
                 </p>
                 <Separator className="my-4"/>
+                <div className="flex flex-col gap-5">
+                    <Button variant="destructive">Delete Account</Button>
+                    <Button variant="destructive">Delete All Messages</Button>
+                    <Button variant="destructive">Delete All Users&Messages</Button>
+                </div>
             </div>
 
             <Rules/>
-
-            <div className="flex flex-col gap-5">
-                <Button variant="destructive">Delete Account</Button>
-                <Button variant="destructive">Delete All Messages</Button>
-                <Button variant="destructive">Delete All Users&Messages</Button>
-            </div>
         </div>
     );
 };

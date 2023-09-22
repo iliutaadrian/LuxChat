@@ -13,7 +13,7 @@ export default async function RoutesLayout({
 
     return (
         <>
-            <div className={'flex w-full md:flex flex-col md:w-80 fixed min-h-full py-5 px-2  border-muted-foreground md:border-r-2 md:ml-20'}>
+            <div className={'flex w-full md:flex flex-col md:w-80 fixed min-h-full py-5 px-5 sm:px-2 border-muted-foreground md:border-r-2 md:ml-20'}>
                 <UserList users={users}/>
             </div>
 
