@@ -3,7 +3,7 @@ import getCurrentUser from "./getCurrentUser";
 import {NextResponse} from "next/server";
 import {never} from "zod";
 
-const getConversation = async (conversationId:number) => {
+const getConversation = async (conversationId:string) => {
     try{
         const currentUser = await getCurrentUser();
 
@@ -13,7 +13,7 @@ const getConversation = async (conversationId:number) => {
 
         const conversation = await prisma.conversation.findUnique({
             where: {
-                id: conversationId
+                id: parseInt(conversationId)
             },
             include: {
                 users: true,

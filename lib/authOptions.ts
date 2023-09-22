@@ -4,6 +4,7 @@ import prisma from "@/lib/prismadb";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 
+
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
@@ -13,10 +14,9 @@ export const authOptions: AuthOptions = {
                 username: { label: 'username', type: 'text' },
                 password: { label: 'password', type: 'password' }
             },
-            async authorize(credentials: { username: string, password: string }) {
-                const { username, password } = credentials;
-
-                if (!username || !password) {
+            // @ts-ignore
+            async authorize(credentials) {
+                if (!credentials?.username || !credentials?.password) {
                     throw new Error('Invalid credentials');
                 }
 
@@ -26,11 +26,14 @@ export const authOptions: AuthOptions = {
                     }
                 });
 
-                if (!user || !user.hashedPassword) {
+                if (!user || !user?.hashedPassword) {
                     throw new Error('Invalid credentials');
                 }
 
-                const isCorrectPassword = await bcrypt.compare(password, user.hashedPassword);
+                const isCorrectPassword = await bcrypt.compare(
+                    credentials.password,
+                    user.hashedPassword
+                );
 
                 if (!isCorrectPassword) {
                     throw new Error('Invalid credentials');

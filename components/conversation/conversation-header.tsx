@@ -1,12 +1,9 @@
 "use client"
 
-import {Conversation, User} from "@prisma/client";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {BellIcon, Calendar, ChevronLeft, MoreHorizontal, Trash, Trash2, User2} from "lucide-react";
 import Link from "next/link";
 import useOtherUser from "@/hooks/useOtherUser";
-import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {format} from "date-fns";
 import {ProfileDrawer} from "@/components/profile-drawer";
 import {FullConversationType, FullMessageType} from "@/types";

@@ -12,7 +12,7 @@ import {useRouter} from "next/navigation";
 
 interface ProfileDrawerProps {
     user: User,
-    conversationId: string
+    conversationId: number
 }
 
 export const ProfileDrawer = ({

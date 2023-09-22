@@ -21,12 +21,15 @@ import {HiArrowLeftOnRectangle} from "react-icons/hi2";
 export function UserAvatarDropdown() {
     const session = useSession()
     const user = session?.data?.user
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-12 w-12 rounded-full">
                     <Avatar className="h-10 w-10">
-                        <AvatarFallback className={'border border-primary text-xl'}>{user?.username.charAt(0).toUpperCase()}</AvatarFallback>
+                        <AvatarFallback className={'border border-primary text-xl'}>
+                            {user?.username?.charAt(0).toUpperCase() ?? ''}
+                        </AvatarFallback>
                     </Avatar>
                 </Button>
             </DropdownMenuTrigger>

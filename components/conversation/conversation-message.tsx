@@ -38,7 +38,7 @@ export const ConversationMessage =  ({
                                         src={message?.image}
                                         width={300}
                                         height={300}
-                                        alt={message?.id}
+                                        alt={String(message.id)}
                                     />
                                 )}
                             </div>
