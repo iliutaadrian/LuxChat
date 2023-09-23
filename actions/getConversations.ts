@@ -16,8 +16,10 @@ const getConversations = async () => {
             where: {
                 users: {
                     some: {
-                        id: currentUser.id,
-                    },
+                        id: {
+                            in: [currentUser.id],
+                        }
+                    }
                 },
             },
             include: {

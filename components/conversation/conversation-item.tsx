@@ -14,7 +14,7 @@ export const ConversationItem =  ({
 }:ConversationItemProps) => {
 
     return (
-        <div className={'relative bg-background'}>
+        <div className={'relative'}>
             <ConversationHeader conversation={conversation} />
             <ConversationBody conversation={conversation}/>
             <ConversationInput conversation={conversation}/>

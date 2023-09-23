@@ -8,7 +8,6 @@ const useOtherUser = (conversation:FullConversationType | {users: User[]}) => {
 
     const otherUser = useMemo(() => {
         const username = session.data?.user?.username;
-        // const username = 'trag'
 
         const otherUser = conversation.users.filter((user) => user.username !== username);
 

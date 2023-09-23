@@ -1,26 +1,33 @@
 import getSession from "./getSession";
 import prisma from "@/lib/prismadb";
+import getCurrentUser from "@/actions/getCurrentUser";
 
 const getUserFriends = async () => {
-    const session = await getSession();
+    const currentUser = await getCurrentUser();
 
-    if (!session?.user?.username) {
+    if (!currentUser?.id) {
         return [];
     }
 
     try {
-        const users = await prisma.user.findMany({
-            orderBy: {
-                createdAt: 'desc'
-            },
+        const friends = await prisma.user.findMany({
             where: {
-                NOT: {
-                    username: session.user.username
-                }
-            }
+                conversations: {
+                    some: {
+                        users: {
+                            some: {
+                                id: currentUser.id,
+                            },
+                        },
+                    },
+                },
+                id: {
+                    not: currentUser.id,
+                },
+            },
         });
 
-        return users;
+        return friends || [];
     } catch (error: any) {
         return [];
     }

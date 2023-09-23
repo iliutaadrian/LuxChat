@@ -19,7 +19,7 @@ export const ConversationHeader = ({
     const otherUser = useOtherUser(conversation)
 
     return (
-        <div className={'sticky top-0 bg-secondary z-20'}>
+        <div className={'sticky top-0 bg-background z-20'}>
             <div
                 className={'flex flex-row px-5 py-3 justify-between align-middle items-center border-b-2 border-muted-foreground'}>
                 <div className={'flex flex-row items-center'}>

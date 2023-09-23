@@ -24,6 +24,7 @@ import {Separator} from "@/components/ui/separator";
 import {ChangeEvent, useCallback, useState} from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
+import {toast} from "@/components/ui/use-toast";
 
 interface AddConversationProps {
     friends: PrismaUser[]
@@ -43,9 +44,37 @@ export const AddConversation = ({ friends }: AddConversationProps) => {
                 userId: userId,
             });
             const conversationId = response.data.id;
+            router.refresh()
             router.push(`/conversations/${conversationId}`);
         } catch (error) {
             console.error('Error starting new conversation:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const newConversation = async () => {
+        try {
+            setIsLoading(true);
+            const searchResponse = await axios.post('/api/users/search', {
+                username: userValue,
+            });
+            const userId = searchResponse.data.id;
+
+            // Second API call to create a conversation
+            const conversationResponse = await axios.post('/api/conversations', {
+                userId: userId,
+            });
+            const conversationId = conversationResponse.data.id;
+
+            router.refresh();
+            router.push(`/conversations/${conversationId}`);
+        } catch (error) {
+            console.error('Error starting new conversation:', error);
+            toast({
+                variant: 'destructive',
+                description: error.response.data,
+            });
         } finally {
             setIsLoading(false);
         }
@@ -58,7 +87,7 @@ export const AddConversation = ({ friends }: AddConversationProps) => {
                     <MailPlus className="w-5 h-5 cursor-pointer" />
                 </Button>
             </DialogTrigger>
-            <DialogContent className="bg-background/50 sm:w-full sm:max-w-xl p-5 rounded-xl w-11/12 md:w-9/12 mx-auto border-4 border-primary/50 shadow-2xl top-1/4">
+            <DialogContent className="bg-background/50 sm:w-full sm:max-w-xl p-5 rounded-xl w-11/12 md:w-9/12 mx-auto border-none shadow-neon top-1/4">
                 <DialogHeader>
                     <DialogTitle>Search Users</DialogTitle>
                     <DialogDescription>
@@ -71,12 +100,15 @@ export const AddConversation = ({ friends }: AddConversationProps) => {
                         placeholder="Search user"
                         onValueChange={handleUserValueChange}
                         value={userValue}
+                        disabled={isLoading}
                     />
                     <CommandList>
                         <CommandEmpty>
                             <Button
                                 variant={'ghost'}
                                 className="w-full"
+                                onClick={newConversation}
+                                disabled={isLoading}
                             >
                                 <PlusCircle className="mr-2 h-4 w-4" />Add new user: <span className="text-primary ml-1">{userValue}</span>
                             </Button>

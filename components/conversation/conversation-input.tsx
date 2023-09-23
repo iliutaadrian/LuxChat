@@ -49,7 +49,7 @@ export const ConversationInput =  ({
 
 
     return (
-        <div className={'sticky pb-10 md:pb-0 bottom-0 w-full bg-secondary'}>
+        <div className={'sticky pb-10 md:pb-0 bottom-0 w-full bg-background'}>
             <form onSubmit={sendMessage}>
                 <div className={'z-20 border-t-2 border-muted-foreground w-full align-middle flex flex-row items-center h-20 gap-4 px-4'}>
                     <Button

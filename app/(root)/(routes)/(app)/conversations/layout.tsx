@@ -20,7 +20,7 @@ export default async function RoutesLayout({
                 <ConversationList initialConversations={conversations} friends={friends}/>
             </div>
 
-            <div className={"md:pl-96 h-full"}>
+            <div className={"md:pl-[25em] h-full"}>
                 {children}
             </div>
         </>
