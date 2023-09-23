@@ -1,76 +1,61 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Separator} from "@/components/ui/separator";
-import {Input} from "@/components/ui/input";
-import {toast} from "@/components/ui/use-toast";
-import {useFieldArray, useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {z} from "zod";
-import {useSession} from "next-auth/react";
+import {signOut, useSession} from "next-auth/react";
 import {Rule} from "postcss";
 import {Rules} from "@/components/rules";
+import axios from "axios";
+import {toast} from "@/components/ui/use-toast";
+import {useState} from "react";
+import {useRouter} from "next/navigation";
 
-const profileFormSchema = z.object({
-    username: z
-        .string()
-        .min(2, {
-            message: "Username must be at least 2 characters.",
-        })
-        .max(30, {
-            message: "Username must not be longer than 30 characters.",
-        }),
-    email: z
-        .string({
-            required_error: "Please select an email to display.",
-        })
-        .email(),
-    bio: z.string().max(160).min(4),
-    urls: z
-        .array(
-            z.object({
-                value: z.string().url({ message: "Please enter a valid URL." }),
-            })
-        )
-        .optional(),
-})
-
-type ProfileFormValues = z.infer<typeof profileFormSchema>
-
-// This can come from your database or API.
-const defaultValues: Partial<ProfileFormValues> = {
-    bio: "I own a computer.",
-    urls: [
-        { value: "https://shadcn.com" },
-        { value: "http://twitter.com/shadcn" },
-    ],
-}
 const SettingsPage = () => {
+    const router = useRouter()
     const session = useSession()
     const user = session?.data?.user
 
-    const form = useForm<ProfileFormValues>({
-        resolver: zodResolver(profileFormSchema),
-        defaultValues,
-        mode: "onChange",
-    })
+    const [isLoading, setIsLoading] = useState(false);
 
-    const { fields, append } = useFieldArray({
-        name: "urls",
-        control: form.control,
-    })
+    const deleteData = async (type:string) => {
+        try {
+            setIsLoading(true);
+            const response = await axios.post('/api/delete', {
+                type
+            });
 
-    function onSubmit(data: ProfileFormValues) {
-        toast({
-            title: "You submitted the following values:",
-            description: (
-                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-            ),
-        })
-    }
+            toast({
+                variant: 'destructive',
+                description: response.data,
+            });
+
+            if (type === 'messages') {
+                window.location.href = '/conversations/'
+            }
+
+            if (type === 'all') {
+                window.location.href = '/conversations/'
+            }
+
+            if (type === 'account') {
+                await signOut()
+                window.location.href = 'https://www.google.com'
+            }
+
+            setIsLoading(false);
+        } catch (error) {
+            console.error('Error starting new conversation:', error);
+
+            toast({
+                variant: 'destructive',
+                // @ts-ignore
+                description: error.response.data,
+            });
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <div className="p-10 flex flex-col gap-5 max-sm:pb-28">
             <div>
@@ -79,10 +64,16 @@ const SettingsPage = () => {
                     {user?.username}
                 </p>
                 <Separator className="my-4"/>
-                <div className="flex flex-col gap-5">
-                    <Button variant="destructive">Delete Account</Button>
-                    <Button variant="destructive">Delete All Messages</Button>
-                    <Button variant="destructive">Delete All Users&Messages</Button>
+                <div className="flex flex-col gap-5 max-w-md mx-auto text-center">
+                    <p className="text-sm text-muted-foreground">
+                        * All the messages will be delete every day at 4:00AM
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                        ** Pressing the buttons will not display a confirmation
+                    </p>
+                    <Button disabled={isLoading} onClick={() => deleteData('messages')} variant="destructiveLight">Delete All Messages</Button>
+                    <Button disabled={isLoading} onClick={() => deleteData('all')} variant="destructiveLight">Delete All Users&Messages</Button>
+                    <Button disabled={isLoading} onClick={() => deleteData('account')} variant="destructive">Delete Account</Button>
                 </div>
             </div>
 

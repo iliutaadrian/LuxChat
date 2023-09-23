@@ -18,12 +18,11 @@ interface ConversationItemProps {
 export const ConversationsItem =  ({
     conversation
 }:ConversationItemProps) => {
-    const router = useRouter()
     const otherUser = useOtherUser(conversation)
 
     const handleClick = useCallback(()=>{
-        router.push(`/conversations/${conversation.id}`);
-    }, [conversation.id, router])
+        window.location.href = `/conversations/${conversation.id}`;
+    }, [conversation.id])
 
 
     const lastMessage = useMemo(()=>{
@@ -43,7 +42,7 @@ export const ConversationsItem =  ({
 
 
     return (
-        <div onClick={handleClick} className={'flex flex-row gap-2 cursor-pointer align-middle items-center p-5 rounded-lg shadow-4xl border-4 border-primary/10 bg-background/50 hover:bg-background'}>
+        <div onClick={handleClick} className={'m-1 shadow-neonLight flex flex-row gap-2 cursor-pointer align-middle items-center p-5 rounded-lg bg-background/50 hover:bg-background'}>
             <div className={'w-10 h-10 relative'}>
                 <Avatar>
                     <AvatarFallback className={'border border-primary'}>{otherUser.username.charAt(0).toUpperCase()}</AvatarFallback>

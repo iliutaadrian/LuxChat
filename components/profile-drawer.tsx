@@ -74,19 +74,17 @@ export const ProfileDrawer = ({
                             </p>
                         </div>
                     </div>
-                    <Button variant={'ghost'} onClick={() => deleteData('delete-data')} className="flex flex-row items-center space-x-4 p-2 transition-all cursor-pointer bg-muted-foreground/50 hover:bg-accent rounded-md hover:text-accent-foreground border-2 border-muted-foreground mt-10">
-                        <Trash className="mt-px h-5 w-5" />
-                        <p className="text-sm font-medium leading-none">Delete data</p>
+                    <Button variant={'destructiveLight'} onClick={() => deleteData('delete-data')}>
+                        Delete data
                     </Button>
 
-                    <Button variant={'ghost'} onClick={() => deleteData('delete-user-data')} className="flex flex-row items-center space-x-4 p-2 transition-all cursor-pointer bg-muted-foreground/50 hover:bg-accent rounded-md hover:text-accent-foreground border-2 border-muted-foreground">
-                        <Trash2 className="mt-px h-5 w-5" />
-                        <p className="text-sm font-medium leading-none">Delete user & data</p>
+                    <Button variant={'destructive'} onClick={() => deleteData('delete-user-data')}>
+                        Delete user & data
                     </Button>
 
 
                     <p className="text-sm text-muted-foreground">
-                        * All the data will be automatically be delete every day at 4:00AM
+                        * All the messages will be delete every day at 4:00AM
                     </p>
                 </div>
             </SheetContent>

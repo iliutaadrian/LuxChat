@@ -24,12 +24,12 @@ interface ConversationListProps {
 }
 
 const ConversationList = ({initialConversations, friends}:ConversationListProps) => {
-    const session = useSession()
-    const userId = session?.data?.user?.id
+    const {isOpen} = useConversations()
+
     const [conversations, setConversations] = useState<FullConversationType[]>(initialConversations)
 
     return (
-        <div className={cn('flex flex-col gap-5 h-full w-full')}>
+        <div className={`flex flex-col gap-5 h-full w-full ${isOpen && 'max-md:hidden'}`}>
             <div className="px-4 flex flex-row justify-between items-center">
                 <h1 className={'text-2xl font-bold'}> Messages </h1>
                 <AddConversation friends={friends}/>

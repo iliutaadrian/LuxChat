@@ -44,8 +44,8 @@ export const AddConversation = ({ friends }: AddConversationProps) => {
                 userId: userId,
             });
             const conversationId = response.data.id;
-            router.refresh()
-            router.push(`/conversations/${conversationId}`);
+
+            window.location.href = `/conversations/${conversationId}`;
         } catch (error) {
             console.error('Error starting new conversation:', error);
         } finally {
@@ -67,12 +67,12 @@ export const AddConversation = ({ friends }: AddConversationProps) => {
             });
             const conversationId = conversationResponse.data.id;
 
-            router.refresh();
-            router.push(`/conversations/${conversationId}`);
+            window.location.href = `/conversations/${conversationId}`;
         } catch (error) {
             console.error('Error starting new conversation:', error);
             toast({
                 variant: 'destructive',
+                // @ts-ignore
                 description: error.response.data,
             });
         } finally {
@@ -87,7 +87,7 @@ export const AddConversation = ({ friends }: AddConversationProps) => {
                     <MailPlus className="w-5 h-5 cursor-pointer" />
                 </Button>
             </DialogTrigger>
-            <DialogContent className="bg-background/50 sm:w-full sm:max-w-xl p-5 rounded-xl w-11/12 md:w-9/12 mx-auto border-none shadow-neon top-1/4">
+            <DialogContent className="bg-background/50 sm:w-full sm:max-w-xl p-5 rounded-xl w-11/12 md:w-9/12 mx-auto border-none shadow-neon">
                 <DialogHeader>
                     <DialogTitle>Search Users</DialogTitle>
                     <DialogDescription>

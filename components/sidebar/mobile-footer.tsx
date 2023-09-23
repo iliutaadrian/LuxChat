@@ -5,6 +5,7 @@ import {useState} from "react";
 import Link from "next/link";
 import {cn} from "@/lib/utils";
 import useConversations from "@/hooks/useConversations";
+import {UserAvatarDropdown} from "@/components/sidebar/user-avatar-dropdown";
 
 export const MobileFooter = () => {
     const routes = useRoutes()
@@ -24,10 +25,11 @@ export const MobileFooter = () => {
                             </li>
                         )
                     })}
+                    <div className="flex justify-center">
+                        <UserAvatarDropdown/>
+                    </div>
                 </ul>
             </nav>
         </div>
     )
 }
-// color them
-// make messages page/ card like the root page

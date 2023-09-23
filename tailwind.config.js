@@ -20,6 +20,9 @@ module.exports = {
     extend: {
       boxShadow: {
         neon: "0 0 5px theme('colors.blue.500'), 0 0 10px theme('colors.blue.800')",
+        neonLight: "0 0 2px theme('colors.blue.500'), 0 0 4px theme('colors.blue.800')",
+        neonDanger: "0 0 5px theme('colors.red.500'), 0 0 10px theme('colors.red.800')",
+        neonDangerLight: "0 0 2px theme('colors.red.500'), 0 0 4px theme('colors.red.800')",
       },
       backgroundColor: {
         'gradient-vedeta': 'radial-gradient(ellipse at top, var(--tw-gradient-stops)) var(--primary)/60 var(--background)',

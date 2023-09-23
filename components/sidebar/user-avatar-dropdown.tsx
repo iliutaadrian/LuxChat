@@ -27,13 +27,13 @@ export function UserAvatarDropdown() {
             <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-12 w-12 rounded-full">
                     <Avatar className="h-10 w-10">
-                        <AvatarFallback className={'border border-primary text-xl'}>
+                        <AvatarFallback className={'text-xl'}>
                             {user?.username?.charAt(0).toUpperCase() ?? ''}
                         </AvatarFallback>
                     </Avatar>
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 border-primary/50" align="start" forceMount>
+            <DropdownMenuContent className="w-56 border-none shadow-neonLight" align="start" forceMount>
                 <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
                         <p className="text-sm font-medium leading-none">{user?.username}</p>

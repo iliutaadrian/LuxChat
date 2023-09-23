@@ -39,7 +39,7 @@ export const Rules = () => {
     return (
         <ul className="list-none grid grid-cols-1 md:grid-cols-2 gap-5">
             {rules.map((rule, index) => (
-                <li key={index} className="p-5 rounded-lg shadow-4xl border-4 border-primary/10 bg-background/50 hover:bg-background group">
+                <li key={index} className="p-5 rounded-lg shadow-neonLight bg-background/50 hover:bg-background group">
                     <div className="flex items-center mb-2">
                         <div className="mr-2 text-primary group-item">{rule.icon}</div>
                         <h3 className="text-lg font-semibold group-hover:text-primary">{rule.title}</h3>
