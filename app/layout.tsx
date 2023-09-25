@@ -9,8 +9,10 @@ import {ClerkProvider} from "@clerk/nextjs";
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Lux Messenger',
-  description: 'Encrypted messaging for everyone',
+    title: 'Lux Messenger',
+    description: 'Encrypted messaging for everyone',
+    manifest: '/manifest.json',
+    themeColor: '#3A82F6',
 }
 
 export default function RootLayout({

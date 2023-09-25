@@ -8,7 +8,7 @@ const nextConfig = {
   ...withPWA({
     dest: 'public',
     register: true,
-    skipWaiting: truegti
+    skipWaiting: true
   }),
   images: {
     domains: ['res.cloudinary.com'],
