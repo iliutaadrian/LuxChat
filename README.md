@@ -1,4 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Lux Chat
+
+Lux Chat is a modern messaging application built with Next.js, Pusher, Tailwind CSS, Prisma with PostgreSQL, and TypeScript. It offers a range of features designed to enhance the chat experience.
+
+## Features
+
+- **Daily Message Deletion**: Every day at 4 AM, all messages are automatically deleted.
+
+- **Username Profile**: Users can create a Lux Chat profile using just their username.
+
+- **Nuclear Mode**: With a single click, all messages and users can be deleted.
+
+- **Messenger-Like UI**: Lux Chat features a Messenger-like UI for discreet messaging.
+
+## Deployment
+
+Lux Chat is deployed using Vercel, providing a seamless hosting experience. 
+
+## Technologies Used
+
+- Next.js: A React framework for building server-side rendered and static websites.
+- Pusher: A real-time communication platform that enables bi-directional communication between servers and clients.
+- Tailwind CSS: A utility-first CSS framework for quickly building custom designs.
+- Prisma with PostgreSQL: A modern database toolkit for TypeScript and Node.js.
+- TypeScript: A statically typed superset of JavaScript that compiles to plain JavaScript.
+
+## Installation
+
+Clone the repository and install the dependencies:
+This is a [Next.js](https://nextjs.org/) project
 
 ## Getting Started
 
@@ -18,17 +47,4 @@ You can start editing the page by modifying `app/route.ts`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
