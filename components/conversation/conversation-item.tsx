@@ -14,7 +14,7 @@ export const ConversationItem =  ({
 }:ConversationItemProps) => {
 
     return (
-        <div className={'relative'}>
+        <div className="flex flex-col h-screen">
             <ConversationHeader conversation={conversation} />
             <ConversationBody conversation={conversation}/>
             <ConversationInput conversation={conversation}/>

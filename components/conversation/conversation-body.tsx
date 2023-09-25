@@ -44,8 +44,7 @@ export const ConversationBody =  ({
     }, [conversationId])
 
     return (
-        <div className={'flex flex-col items-start h-screen'}>
-            <ScrollArea className="w-full h-full">
+            <div className="flex-1 overflow-y-auto">
                 {messages?.map((message) => {
                     return (
                         <ConversationMessage
@@ -56,7 +55,6 @@ export const ConversationBody =  ({
                     )
                 })}
                 <div className="pt-5" ref={bottomRef} />
-            </ScrollArea>
-        </div>
+            </div>
     )
 }
