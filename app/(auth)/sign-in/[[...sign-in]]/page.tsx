@@ -21,7 +21,8 @@ export default function Page() {
                         'text-foreground',
                     footerActionLink:
                         'text-muted-foreground',
-
+                    identityPreviewText:
+                        'text-foreground',
                 },
             }}
         />

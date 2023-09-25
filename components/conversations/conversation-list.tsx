@@ -1,12 +1,14 @@
 "use client"
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {ConversationsItem} from "@/components/conversations/conversations-item";
 import useConversations from "@/hooks/useConversations";
-import {FullConversationType, UserClerk} from "@/types";
+import {FullConversationType, FullMessageType, UserClerk} from "@/types";
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {AddConversation} from "@/components/conversations/add-conversation";
 import {UserJSON} from "@clerk/types";
+import {pusherClient} from "@/lib/pusher";
+import {useUser} from "@clerk/nextjs";
 
 
 interface ConversationListProps {
@@ -16,8 +18,34 @@ interface ConversationListProps {
 
 const ConversationList = ({initialConversations, friends}:ConversationListProps) => {
     const {isOpen} = useConversations()
-
     const [conversations, setConversations] = useState<FullConversationType[]>(initialConversations)
+    const {user} = useUser()
+
+    useEffect(() => {
+        if (!user) return
+        pusherClient.subscribe(`${user?.id}`)
+
+        const updateHandler = (conversation: any) => {
+
+            setConversations((current) => current.map((currentConversation) => {
+                if (currentConversation.id === conversation.id) {
+                    return {
+                        ...currentConversation,
+                        messages: [...currentConversation.messages, conversation.lastMessage]
+                    };
+                }
+
+                return currentConversation;
+            }));
+        }
+
+        pusherClient.bind( 'conversation-update', updateHandler)
+
+        return () => {
+            pusherClient.unbind( 'conversation-update', updateHandler)
+            pusherClient.unsubscribe(`${user?.id}`)
+        }
+    }, []);
 
     return (
         <div className={`flex flex-col gap-5 h-full w-full ${isOpen && 'max-md:hidden'}`}>

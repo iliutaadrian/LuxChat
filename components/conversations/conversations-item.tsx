@@ -1,8 +1,9 @@
 "use client"
 
-import {useCallback, useMemo} from "react";
+import {useCallback, useEffect, useMemo} from "react";
 import {Avatar, AvatarFallback} from "@/components/ui/avatar";
-import {FullConversationType} from "@/types";
+import {FullConversationType, FullMessageType} from "@/types";
+import {pusherClient} from "@/lib/pusher";
 
 
 interface ConversationItemProps {

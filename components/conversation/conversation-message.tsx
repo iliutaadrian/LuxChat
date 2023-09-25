@@ -23,13 +23,14 @@ export const ConversationMessage =  ({
     }
 
     const role = user.id === message.user ? 'sender' : 'reciever'
+    const selected_user = user.id === message.user ? user : otherUser
 
     return (
         <div>
             <div className={cn('flex my-2 p-3 cursor-pointer rounded-lg items-end', role === 'sender' ? 'flex-row-reverse text-right items-end' : 'flex-row')}>
                     <div className={'w-10 h-10 relative'}>
                         <Avatar>
-                            <AvatarFallback className={'border border-primary'}>{otherUser.username.charAt(0).toUpperCase()}</AvatarFallback>
+                            <AvatarFallback className={'border border-primary'}>{selected_user.username.charAt(0).toUpperCase()}</AvatarFallback>
                         </Avatar>
                     </div>
                     <div className={cn("flex flex-col", role === 'sender' && 'items-end')}>
@@ -49,7 +50,7 @@ export const ConversationMessage =  ({
                         </div>
 
                         <div className={'mx-4 text-xs pb-1'}>
-                            {otherUser.username} <span className={'text-muted-foreground'}>{format(new Date(message?.createdAt), 'yyyy/MM/dd kk:mm')}</span>
+                            {selected_user.username} <span className={'text-muted-foreground'}>{format(new Date(message?.createdAt), 'yyyy/MM/dd kk:mm')}</span>
                         </div>
                     </div>
 

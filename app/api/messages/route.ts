@@ -47,18 +47,21 @@ export async function POST(
                         id: newMessage.id
                     }
                 }
+            },
+            include: {
+                messages: true
             }
         })
 
-        // await pusherServer.trigger(`conversation-${conversationId}`, 'new-message', newMessage)
-        //
-        // const lastMessage = updatedConversation.messages[updatedConversation.messages.length - 1];
-        // updatedConversation.users.map((user) => {
-        //     pusherServer.trigger(`user-${user.id}`, 'conversation-update', {
-        //         id: conversationId,
-        //         lastMessage: lastMessage,
-        //     })
-        // })
+        await pusherServer.trigger(`conversation-${conversationId}`, 'new-message', newMessage)
+
+        const lastMessage = updatedConversation.messages[updatedConversation.messages.length - 1];
+        updatedConversation.users.map((user) => {
+            pusherServer.trigger(`muie`, 'conversation-update', {
+                id: conversationId,
+                lastMessage: lastMessage,
+            })
+        })
 
         return new NextResponse(JSON.stringify(newMessage), { status: 200 });
 
