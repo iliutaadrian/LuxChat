@@ -1,12 +1,14 @@
-import {Conversation, Message, User} from "@prisma/client";
+import {Conversation, Message} from "@prisma/client";
 
-
-export type FullMessageType = Message & {
-    sender: User,
-    seen: User[]
+export type UserClerk = {
+    id: string,
+    username: string,
+    createdAt: string
 }
 
+export type FullMessageType = Message
+
 export type FullConversationType = Conversation & {
-    users: User[],
+    users_full: UserClerk,
     messages: FullMessageType[]
 }

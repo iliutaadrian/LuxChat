@@ -1,10 +1,11 @@
 import prisma from "@/lib/prismadb";
-import getCurrentUser from "./getCurrentUser";
+import {clerkClient, currentUser} from '@clerk/nextjs';
+import {NextResponse} from "next/server";
 
 const getConversations = async () => {
-    const currentUser = await getCurrentUser();
+    const user = await currentUser();
 
-    if (!currentUser?.id) {
+    if (!user?.id) {
         return [];
     }
 
@@ -15,25 +16,30 @@ const getConversations = async () => {
             },
             where: {
                 users: {
-                    some: {
-                        id: {
-                            in: [currentUser.id],
-                        }
-                    }
+                    has: user.id,
                 },
             },
             include: {
-                users: true,
-                messages: {
-                    include: {
-                        sender: true,
-                        seen: true,
-                    }
-                },
+                messages: true,
             }
         });
 
-        return conversations;
+        const conversations_with_users = await Promise.all(conversations.map(async conversation => {
+            const userId = conversation?.users.filter((id) => id !== user.id);
+            const user_search = await clerkClient.users.getUserList({userId});
+
+            return {
+                ...conversation,
+                users_full: {
+                    id: user_search[0].id,
+                    username: user_search[0].username,
+                    createdAt: user_search[0].createdAt,
+
+                }
+            };
+        }))
+
+        return conversations_with_users;
     } catch (error: any) {
         return [];
     }

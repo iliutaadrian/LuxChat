@@ -1,22 +1,20 @@
 "use client"
 
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import {BellIcon, Calendar, ChevronLeft, MoreHorizontal, Trash, Trash2, User2} from "lucide-react";
+import {Avatar, AvatarFallback} from "@/components/ui/avatar";
+import {ChevronLeft} from "lucide-react";
 import Link from "next/link";
-import useOtherUser from "@/hooks/useOtherUser";
-import {format} from "date-fns";
 import {ProfileDrawer} from "@/components/profile-drawer";
-import {FullConversationType, FullMessageType} from "@/types";
 
 
 interface ConversationItemProps {
-    conversation: FullConversationType
+    conversation: any
 }
 
 export const ConversationHeader = ({
                                        conversation
                                    }: ConversationItemProps) => {
-    const otherUser = useOtherUser(conversation)
+
+    const otherUser = conversation.users_full
 
     return (
         <div className={'sticky top-0 bg-background z-20'}>

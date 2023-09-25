@@ -1,27 +1,21 @@
 import prisma from "@/lib/prismadb";
-import getCurrentUser from "./getCurrentUser";
+import {clerkClient, currentUser} from '@clerk/nextjs';
 import {NextResponse} from "next/server";
-import {never} from "zod";
 
 const getConversation = async (conversationId:string) => {
     try{
-        const currentUser = await getCurrentUser();
+        const user = await currentUser();
 
-        if (!currentUser?.username) {
+        if (!user) {
             return null;
         }
 
         const conversation = await prisma.conversation.findUnique({
             where: {
-                id: parseInt(conversationId)
+                id: conversationId
             },
             include: {
-                users: true,
                 messages: {
-                    include: {
-                        sender: true,
-                        seen: true,
-                    },
                     orderBy: {
                         createdAt: 'asc'
                     }
@@ -29,7 +23,20 @@ const getConversation = async (conversationId:string) => {
             },
         })
 
-        return conversation
+        const userId = conversation?.users.filter((id) => id !== user.id);
+
+        const user_search = await clerkClient.users.getUserList({userId});
+
+        const conversation_with_users = {
+            ...conversation,
+            users_full: {
+                id: user_search[0].id,
+                username: user_search[0].username,
+                createdAt: user_search[0].createdAt,
+            }
+        }
+
+        return conversation_with_users
     } catch (error: any) {
         console.log(error)
         return null

@@ -1,7 +1,6 @@
 "use client"
 
 import axios from "axios";
-import { signOut } from "next-auth/react";
 import { toast } from "@/components/ui/use-toast";
 import { useEffect } from "react";
 
@@ -13,11 +12,11 @@ export default async function NuclearPage() {
                     type: 'account'
                 });
 
-                await signOut();
                 window.location.href = 'https://www.google.com';
             } catch (error) {
                 toast({
                     variant: 'destructive',
+                    // @ts-ignore
                     description: error.response.data,
                 });
             }

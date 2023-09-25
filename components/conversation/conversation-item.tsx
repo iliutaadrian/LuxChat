@@ -6,7 +6,7 @@ import {ConversationInput} from "@/components/conversation/conversation-input";
 import {FullConversationType, FullMessageType} from "@/types";
 
 interface ConversationItemProps {
-    conversation: FullConversationType
+    conversation: any
 }
 
 export const ConversationItem =  ({

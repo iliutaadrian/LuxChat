@@ -1,6 +1,5 @@
 import {Button} from "@/components/ui/button";
 import { MailPlus, Plus, PlusCircle, Smile, User } from "lucide-react";
-import { User as PrismaUser } from "@prisma/client";
 import {
     Dialog,
     DialogContent,
@@ -27,7 +26,7 @@ import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 
 interface AddConversationProps {
-    friends: PrismaUser[]
+    friends: any[]
 }
 export const AddConversation = ({ friends }: AddConversationProps) => {
     const [userValue, setUserValue] = useState('');
@@ -61,10 +60,10 @@ export const AddConversation = ({ friends }: AddConversationProps) => {
             });
             const userId = searchResponse.data.id;
 
-            // Second API call to create a conversation
             const conversationResponse = await axios.post('/api/conversations', {
                 userId: userId,
             });
+
             const conversationId = conversationResponse.data.id;
 
             window.location.href = `/conversations/${conversationId}`;

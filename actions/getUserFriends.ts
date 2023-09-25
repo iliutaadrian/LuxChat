@@ -1,32 +1,33 @@
-import getSession from "./getSession";
 import prisma from "@/lib/prismadb";
-import getCurrentUser from "@/actions/getCurrentUser";
+import {clerkClient, currentUser} from '@clerk/nextjs';
 
 const getUserFriends = async () => {
-    const currentUser = await getCurrentUser();
+    const user = await currentUser();
 
-    if (!currentUser?.id) {
+    if (!user) {
         return [];
     }
 
     try {
-        const friends = await prisma.user.findMany({
+        const conversations = await prisma.conversation.findMany({
             where: {
-                conversations: {
-                    some: {
-                        users: {
-                            some: {
-                                id: currentUser.id,
-                            },
-                        },
-                    },
-                },
-                id: {
-                    not: currentUser.id,
+                users: {
+                    has: user.id,
                 },
             },
         });
 
+        const friends = await Promise.all(conversations.map(async conversation => {
+            const userId = conversation?.users.filter((id) => id !== user.id);
+            const user_search = await clerkClient.users.getUserList({userId});
+
+            return {
+                id: user_search[0].id,
+                username: user_search[0].username,
+                createdAt: user_search[0].createdAt,
+
+            }
+        }))
         return friends || [];
     } catch (error: any) {
         return [];

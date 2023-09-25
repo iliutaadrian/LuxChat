@@ -1,21 +1,21 @@
 "use client"
 
-import { Button } from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
 import {Separator} from "@/components/ui/separator";
-import {signOut, useSession} from "next-auth/react";
-import {Rule} from "postcss";
+import {signOut} from "next-auth/react";
 import {Rules} from "@/components/rules";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {useState} from "react";
-import {useRouter} from "next/navigation";
+import {useUser} from "@clerk/nextjs";
 
 const SettingsPage = () => {
-    const router = useRouter()
-    const session = useSession()
-    const user = session?.data?.user
-
     const [isLoading, setIsLoading] = useState(false);
+
+    const {user} = useUser()
+    if (!user) {
+        return null
+    }
 
     const deleteData = async (type:string) => {
         try {
@@ -29,20 +29,13 @@ const SettingsPage = () => {
                 description: response.data,
             });
 
-            if (type === 'messages') {
-                window.location.href = '/conversations/'
-            }
-
-            if (type === 'all') {
-                window.location.href = '/conversations/'
-            }
-
             if (type === 'account') {
                 await signOut()
                 window.location.href = 'https://www.google.com'
             }
-
-            setIsLoading(false);
+            else {
+                window.location.href = '/conversations/'
+            }
         } catch (error) {
             console.error('Error starting new conversation:', error);
 

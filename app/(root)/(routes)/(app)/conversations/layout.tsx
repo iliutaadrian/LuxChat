@@ -1,9 +1,5 @@
 import getConversations from "@/actions/getConversations";
 import ConversationList from "@/components/conversations/conversation-list";
-import {MobileFooter} from "@/components/sidebar/mobile-footer";
-import {DesktopSidebar} from "@/components/sidebar/desktop-sidebar";
-import useConversations from "@/hooks/useConversations";
-import getUsers from "@/actions/getUsers";
 import getUserFriends from "@/actions/getUserFriends";
 
 export default async function RoutesLayout({

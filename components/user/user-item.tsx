@@ -1,32 +1,33 @@
 "use client"
 
-import {useRouter} from "next/navigation";
-import {useCallback, useState} from "react";
 import axios from "axios";
-import {  User } from "@prisma/client";
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {Avatar, AvatarFallback} from "@/components/ui/avatar";
+import {signOut} from "next-auth/react";
+import {toast} from "@/components/ui/use-toast";
 
 
 interface UserItemProps {
-    user: User
+    user: any
 }
 
 export const UserItem =  ({
     user
 }:UserItemProps) => {
-    const router = useRouter()
-    const [isLoading, setIsLoading] = useState(false)
-
-    const handleClick = useCallback(()=>{
-        setIsLoading(true)
-
-        axios.post('/api/conversations', {
-            userId: user.id
-        }).then((data) => {
-            window.location.href = `/conversations/${data.data.id}`
-        }).finally(() => setIsLoading(false));
-
-    }, [user, router])
+    const handleClick = async ()=> {
+        try {
+            await axios.post('/api/conversations', {
+                userId: user.id
+            }).then((data) => {
+                window.location.href = `/conversations/${data.data.id}`
+            })
+        } catch (error) {
+            toast({
+                variant: 'destructive',
+                // @ts-ignore
+                description: error.response.data,
+            });
+        }
+    }
 
     return (
         <div onClick={handleClick} className={'m-1 shadow-neonLight flex flex-row gap-2 cursor-pointer align-middle items-center p-5 rounded-lg bg-background/50 hover:bg-background'}>

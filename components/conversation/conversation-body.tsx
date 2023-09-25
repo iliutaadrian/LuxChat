@@ -1,18 +1,10 @@
 "use client"
 
-import {useRouter} from "next/navigation";
-import {useCallback, useEffect, useRef, useState} from "react";
-import axios from "axios";
-import {Conversation, Message, User} from "@prisma/client";
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import {ChevronLeft, MoreHorizontal, Image, PlusCircle, SendHorizonal, Mic} from "lucide-react";
-import {Input} from "@/components/ui/input";
+import {useEffect, useRef, useState} from "react";
 import {ConversationMessage} from "@/components/conversation/conversation-message";
 import {ScrollArea} from "@/components/ui/scroll-area";
-import {useSession} from "next-auth/react";
 import {pusherClient} from "@/lib/pusher";
 import {FullConversationType, FullMessageType} from "@/types";
-import {find} from "lodash";
 import useConversations from "@/hooks/useConversations";
 
 interface ConversationItemProps {
@@ -59,6 +51,7 @@ export const ConversationBody =  ({
                         <ConversationMessage
                             key={message.id}
                             message={message}
+                            otherUser={conversation.users_full}
                         />
                     )
                 })}

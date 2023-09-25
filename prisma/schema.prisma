@@ -9,25 +9,8 @@ datasource db {
   url      = env("POSTGRES_PRISMA_URL")
 }
 
-model User {
-  id             Int      @id @default(autoincrement())
-  username       String   @unique
-  hashedPassword String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  conversations Conversation[]
-
-  seenMessages Message[] @relation("seen")
-
-  friends  User[] @relation("friends")
-  friendOf User[] @relation("friends")
-
-  messages Message[]
-}
-
 model Conversation {
-  id            Int      @id @default(autoincrement())
+  id            String   @id @default(uuid())
   createdAt     DateTime @default(now())
   lastMessageAt DateTime @default(now())
   name          String?
@@ -35,20 +18,19 @@ model Conversation {
 
   messages Message[]
 
-  users User[]
+  users String[]
 }
 
 model Message {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   body      String?
   image     String?
   createdAt DateTime @default(now())
 
-  seen User[] @relation("seen")
+  seen      String[]
 
-  conversation Conversation @relation(fields: [conversationId], references: [id])
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  conversationId String
 
-  sender         User @relation(fields: [userId], references: [id])
-  conversationId Int
-  userId         Int
+  user String
 }

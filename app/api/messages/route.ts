@@ -1,14 +1,14 @@
 import {NextResponse} from "next/server";
 import prisma from "@/lib/prismadb";
-import getCurrentUser from "@/actions/getCurrentUser";
-import { pusherServer } from "@/lib/pusher";
+import {pusherServer} from "@/lib/pusher";
+import {currentUser} from "@clerk/nextjs";
 
 export async function POST(
     request: Request,
 ) {
     try{
-        const currentUser = await getCurrentUser();
-        if (!currentUser?.id || !currentUser?.username) {
+        const user = await currentUser();
+        if (!user) {
             return new NextResponse('Unauthorized', {status: 401})
         }
 
@@ -32,20 +32,7 @@ export async function POST(
                         id: conversationId
                     }
                 },
-                sender: {
-                    connect: {
-                        id: currentUser.id
-                    }
-                },
-                seen: {
-                    connect: {
-                        id: currentUser.id
-                    }
-                }
-            },
-            include: {
-                sender: true,
-                seen: true
+                user: user.id,
             }
         })
 
@@ -60,26 +47,18 @@ export async function POST(
                         id: newMessage.id
                     }
                 }
-            },
-            include: {
-                messages: {
-                    include: {
-                        seen: true
-                    }
-                },
-                users: true
             }
         })
 
-        await pusherServer.trigger(`conversation-${conversationId}`, 'new-message', newMessage)
-
-        const lastMessage = updatedConversation.messages[updatedConversation.messages.length - 1];
-        updatedConversation.users.map((user) => {
-            pusherServer.trigger(`user-${user.id}`, 'conversation-update', {
-                id: conversationId,
-                lastMessage: lastMessage,
-            })
-        })
+        // await pusherServer.trigger(`conversation-${conversationId}`, 'new-message', newMessage)
+        //
+        // const lastMessage = updatedConversation.messages[updatedConversation.messages.length - 1];
+        // updatedConversation.users.map((user) => {
+        //     pusherServer.trigger(`user-${user.id}`, 'conversation-update', {
+        //         id: conversationId,
+        //         lastMessage: lastMessage,
+        //     })
+        // })
 
         return new NextResponse(JSON.stringify(newMessage), { status: 200 });
 

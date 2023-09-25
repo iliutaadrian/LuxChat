@@ -14,13 +14,16 @@ import {
     DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import {signOut, useSession} from "next-auth/react";
 import {ModeToggle} from "@/components/mode-toggle";
 import {HiArrowLeftOnRectangle} from "react-icons/hi2";
+import {currentUser, SignOutButton, useUser} from "@clerk/nextjs";
 
-export function UserAvatarDropdown() {
-    const session = useSession()
-    const user = session?.data?.user
+export const UserAvatarDropdown = () => {
+    const { user } = useUser();
+
+    if (!user) {
+        return null
+    }
 
     return (
         <DropdownMenu>
@@ -49,17 +52,21 @@ export function UserAvatarDropdown() {
                         <DropdownMenuShortcut>
                             <ModeToggle/>
                         </DropdownMenuShortcut>
-
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer" onClick={()=>{window.location.replace('/settings')}}>
                         Settings
-                        <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={()=>{signOut()}}>
-                    Log out
-                    <DropdownMenuShortcut><HiArrowLeftOnRectangle className={'w-5 h-5'} /></DropdownMenuShortcut>
+                <DropdownMenuItem>
+                    <SignOutButton>
+                        <p className="flex flex-row justify-between w-full cursor-pointer">
+                            Log out
+                            <DropdownMenuShortcut>
+                                <HiArrowLeftOnRectangle className={'w-5 h-5'} />
+                            </DropdownMenuShortcut>
+                        </p>
+                    </SignOutButton>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

@@ -1,16 +1,7 @@
-import { withAuth } from "next-auth/middleware";
+import {authMiddleware} from "@clerk/nextjs";
 
-export default withAuth({
-    pages: {
-        signIn: "/auth",
-    },
-});
+export default authMiddleware({});
 
 export const config = {
-    matcher: [
-        "/conversations/:path*",
-        "/users/:path*",
-        "/settings",
-        "/",
-    ],
+    matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)']
 };

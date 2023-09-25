@@ -1,31 +1,35 @@
 "use client"
 
-import {Conversation, Message} from "@prisma/client";
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {Avatar, AvatarFallback} from "@/components/ui/avatar";
 import {cn} from "@/lib/utils";
-import {ScrollArea} from "@/components/ui/scroll-area";
-import { format } from 'date-fns';
-import {useSession} from "next-auth/react";
+import {format} from 'date-fns';
 import Image from 'next/image'
 import {FullMessageType} from "@/types";
+import {useUser} from "@clerk/nextjs";
 
 
 interface ConversationItemProps {
     message: FullMessageType,
+    otherUser: any
 }
 
 export const ConversationMessage =  ({
                                          message,
+                                         otherUser
 }:ConversationItemProps) => {
-    const session = useSession()
-    const role = session?.data?.user?.username === message?.sender?.username ? 'sender' : 'reciever'
+    const {user} = useUser()
+    if (!user) {
+        return null
+    }
+
+    const role = user.id === message.user ? 'sender' : 'reciever'
 
     return (
         <div>
             <div className={cn('flex my-2 p-3 cursor-pointer rounded-lg items-end', role === 'sender' ? 'flex-row-reverse text-right items-end' : 'flex-row')}>
                     <div className={'w-10 h-10 relative'}>
                         <Avatar>
-                            <AvatarFallback className={'border border-primary'}>{message.sender.username.charAt(0).toUpperCase()}</AvatarFallback>
+                            <AvatarFallback className={'border border-primary'}>{otherUser.username.charAt(0).toUpperCase()}</AvatarFallback>
                         </Avatar>
                     </div>
                     <div className={cn("flex flex-col", role === 'sender' && 'items-end')}>
@@ -45,7 +49,7 @@ export const ConversationMessage =  ({
                         </div>
 
                         <div className={'mx-4 text-xs pb-1'}>
-                            {message.sender.username} <span className={'text-muted-foreground'}>{format(new Date(message?.createdAt), 'yyyy/MM/dd kk:mm')}</span>
+                            {otherUser.username} <span className={'text-muted-foreground'}>{format(new Date(message?.createdAt), 'yyyy/MM/dd kk:mm')}</span>
                         </div>
                     </div>
 

@@ -1,14 +1,8 @@
 "use client"
 
-import {useRouter} from "next/navigation";
-import {useCallback, useMemo, useState} from "react";
-import axios from "axios";
-import {  Conversation } from "@prisma/client";
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import Image from "next/image";
+import {useCallback, useMemo} from "react";
+import {Avatar, AvatarFallback} from "@/components/ui/avatar";
 import {FullConversationType} from "@/types";
-import useOtherUser from "@/hooks/useOtherUser";
-import {useSession} from "next-auth/react";
 
 
 interface ConversationItemProps {
@@ -18,7 +12,7 @@ interface ConversationItemProps {
 export const ConversationsItem =  ({
     conversation
 }:ConversationItemProps) => {
-    const otherUser = useOtherUser(conversation)
+    const otherUser = conversation.users_full
 
     const handleClick = useCallback(()=>{
         window.location.href = `/conversations/${conversation.id}`;

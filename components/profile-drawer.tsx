@@ -1,17 +1,16 @@
 "use client"
 
-import {User} from "@prisma/client";
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import {Calendar, MoreHorizontal, Trash, Trash2, User2} from "lucide-react";
+import {Avatar, AvatarFallback} from "@/components/ui/avatar";
+import {Calendar, MoreHorizontal, User2} from "lucide-react";
 import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTrigger} from "@/components/ui/sheet";
 import {format} from "date-fns";
 import {Button} from "@/components/ui/button";
+import {useState} from "react";
 import axios from "axios";
-import {router} from "next/client";
-import {useRouter} from "next/navigation";
+import {toast} from "@/components/ui/use-toast";
 
 interface ProfileDrawerProps {
-    user: User,
+    user: any,
     conversationId: number
 }
 
@@ -19,16 +18,34 @@ export const ProfileDrawer = ({
                                   user,
                                   conversationId
 }: ProfileDrawerProps) => {
-    const router = useRouter()
+    const [isLoading, setIsLoading] = useState(false);
 
-    const deleteData = (deleteType: string) => {
-        axios.post(`/api/users`, {
-            conversationId: conversationId,
-            deleteType: deleteType
-        }).then(() => {
-            router.push('/conversations/')
-        })
-    }
+    const deleteData = async (type:string) => {
+        try {
+            setIsLoading(true);
+            const response = await axios.post('/api/users/delete', {
+                type,
+                conversationId
+            });
+
+            toast({
+                variant: 'destructive',
+                description: response.data,
+            });
+
+            window.location.href = '/conversations/'
+        } catch (error) {
+            console.error('Error starting new conversation:', error);
+
+            toast({
+                variant: 'destructive',
+                // @ts-ignore
+                description: error.response.data,
+            });
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
         <Sheet>
@@ -74,18 +91,16 @@ export const ProfileDrawer = ({
                             </p>
                         </div>
                     </div>
-                    <Button variant={'destructiveLight'} onClick={() => deleteData('delete-data')}>
-                        Delete data
-                    </Button>
-
-                    <Button variant={'destructive'} onClick={() => deleteData('delete-user-data')}>
-                        Delete user & data
-                    </Button>
-
-
                     <p className="text-sm text-muted-foreground">
                         * All the messages will be delete every day at 4:00AM
                     </p>
+                    <Button disabled={isLoading} variant={'destructiveLight'} onClick={() => deleteData('delete-data')}>
+                        Delete data
+                    </Button>
+
+                    <Button disabled={isLoading} variant={'destructive'} onClick={() => deleteData('delete-user-data')}>
+                        Delete user & data
+                    </Button>
                 </div>
             </SheetContent>
         </Sheet>

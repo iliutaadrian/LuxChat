@@ -11,7 +11,7 @@ export default async function RootLayout({
 }) {
 
     return (
-        <div className="h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 to-background flex justify-center items-center">
+        <div className={"flex flex-col min-h-full justify-center items-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/40 to-background"}>
             {children}
         </div>
     )
