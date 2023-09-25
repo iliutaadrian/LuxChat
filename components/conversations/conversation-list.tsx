@@ -3,7 +3,7 @@
 import {useState} from "react";
 import {ConversationsItem} from "@/components/conversations/conversations-item";
 import useConversations from "@/hooks/useConversations";
-import {FullConversationType} from "@/types";
+import {FullConversationType, UserClerk} from "@/types";
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {AddConversation} from "@/components/conversations/add-conversation";
 import {UserJSON} from "@clerk/types";
@@ -11,7 +11,7 @@ import {UserJSON} from "@clerk/types";
 
 interface ConversationListProps {
     initialConversations: any[],
-    friends: any[]
+    friends: UserClerk[]
 }
 
 const ConversationList = ({initialConversations, friends}:ConversationListProps) => {

@@ -1,17 +1,13 @@
 "use client"
 
-import getUsers from "@/actions/getUsers";
-import {useCallback, useContext, useState} from "react";
-import axios from "axios";
-import {useRouter} from "next/navigation";
-import {  User } from "@prisma/client";
+import {useState} from "react";
 import {UserItem} from "@/components/user/user-item";
 import {ScrollArea} from "@/components/ui/scroll-area";
-import {MailPlus, UserPlus} from "lucide-react";
 import {AddConversation} from "@/components/conversations/add-conversation";
+import {UserClerk} from "@/types";
 
 interface UserListProps {
-    users: User[],
+    users: UserClerk[],
 }
 
 export const UserList = ({users}:UserListProps) => {

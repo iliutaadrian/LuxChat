@@ -24,9 +24,10 @@ import {ChangeEvent, useCallback, useState} from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
+import {UserClerk} from "@/types";
 
 interface AddConversationProps {
-    friends: any[]
+    friends: UserClerk[]
 }
 export const AddConversation = ({ friends }: AddConversationProps) => {
     const [userValue, setUserValue] = useState('');
@@ -36,7 +37,7 @@ export const AddConversation = ({ friends }: AddConversationProps) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
-    const newConversationFriend = async (userId: number) => {
+    const newConversationFriend = async (userId: string) => {
         try {
             setIsLoading(true);
             const response = await axios.post('/api/conversations', {

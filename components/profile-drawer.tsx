@@ -8,9 +8,10 @@ import {Button} from "@/components/ui/button";
 import {useState} from "react";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
+import {UserClerk} from "@/types";
 
 interface ProfileDrawerProps {
-    user: any,
+    user: UserClerk,
     conversationId: number
 }
 
@@ -58,7 +59,7 @@ export const ProfileDrawer = ({
                     <SheetDescription className={'flex flex-col items-center align-middle gap-3 pt-10'}>
                         <div className={'w-20 h-20 relative pl-1'}>
                             <Avatar className={'w-20 h-20'}>
-                                <AvatarFallback className={'border border-primary text-4xl'}>{user.username.charAt(0).toUpperCase()}</AvatarFallback>
+                                <AvatarFallback className={'border border-primary text-4xl'}>{user?.username?.charAt(0).toUpperCase()}</AvatarFallback>
                             </Avatar>
                             <span
                                 className={'absolute top-0 right-0 bg-green-500 border-2 border-primary w-4 h-4 rounded-full shadow-xl shadow-black'}>
@@ -87,7 +88,7 @@ export const ProfileDrawer = ({
                         <div className="space-y-1">
                             <p className="text-sm font-medium leading-none">Joined</p>
                             <p className="text-sm text-muted-foreground">
-                                {format(user?.createdAt, 'yyyy/MM/dd kk:mm')}
+                                {user?.createdAt && format(user?.createdAt, 'yyyy/MM/dd kk:mm')}
                             </p>
                         </div>
                     </div>

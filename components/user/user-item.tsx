@@ -4,10 +4,11 @@ import axios from "axios";
 import {Avatar, AvatarFallback} from "@/components/ui/avatar";
 import {signOut} from "next-auth/react";
 import {toast} from "@/components/ui/use-toast";
+import {UserClerk} from "@/types";
 
 
 interface UserItemProps {
-    user: any
+    user: UserClerk
 }
 
 export const UserItem =  ({
@@ -33,12 +34,12 @@ export const UserItem =  ({
         <div onClick={handleClick} className={'m-1 shadow-neonLight flex flex-row gap-2 cursor-pointer align-middle items-center p-5 rounded-lg bg-background/50 hover:bg-background'}>
             <div className={'w-10 h-10 relative'}>
                 <Avatar>
-                    <AvatarFallback className={'border border-primary'}>{user.username.charAt(0).toUpperCase()}</AvatarFallback>
+                    <AvatarFallback className={'border border-primary'}>{user?.username?.charAt(0).toUpperCase()}</AvatarFallback>
                 </Avatar>
                 <span className={'absolute top-0 right-0 bg-green-500 w-3 h-3 rounded-full shadow-xl shadow-black'}> </span>
             </div>
             <p className={'ml-2 text-sm font-medium'}>
-                {user.username}
+                {user?.username}
             </p>
         </div>
     )
