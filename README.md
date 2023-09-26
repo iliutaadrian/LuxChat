@@ -14,19 +14,19 @@ Lux Chat is a modern messaging application built with Next.js, Pusher, Tailwind 
 
 ### Dashboard
 
-![Dashboard Screenshot](./screenshots/dashboard.png)
+<img src="/public/screenshots/dashboard.png" alt="Dashboard Screenshot" width="800">
 
 This screenshot shows the Lux Chat dashboard, providing an overview of the user's conversations and notifications.
 
 ### Landing
 
-![Landing Screenshot](./screenshots/landing.png)
+<img src="/public/screenshots/landing.png" alt="Landing Screenshot" width="800">
 
 The landing screenshot showcases the Lux Chat landing page, featuring an attractive and user-friendly design.
 
 ### Mobile Chat
 
-![Mobile Chat Screenshot](./screenshots/mobile_chat.png)
+<img src="/public/screenshots/mobile_chat.png" alt="Mobile Chat Screenshot" width="800">
 
 This screenshot demonstrates the Lux Chat mobile chat interface, optimized for a seamless messaging experience on mobile devices.
 
