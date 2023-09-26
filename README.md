@@ -26,7 +26,7 @@ The landing screenshot showcases the Lux Chat landing page, featuring an attract
 
 ### Mobile Chat
 
-<img src="/public/screenshots/mobile_chat.png" alt="Mobile Chat Screenshot" width="800">
+<img src="/public/screenshots/mobile_chat.png" alt="Mobile Chat Screenshot" width="300">
 
 This screenshot demonstrates the Lux Chat mobile chat interface, optimized for a seamless messaging experience on mobile devices.
 
